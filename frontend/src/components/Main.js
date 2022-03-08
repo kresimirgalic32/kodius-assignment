@@ -3,13 +3,15 @@ import axios from "axios";
 import Product from "./Product";
 
 const Main = (props) => {
-  const { products, onAdd } = props;
-  const [setProducts] = useState([]);
+  const { test, onAdd } = props;
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get("/api/products");
       setProducts(data);
     };
+
     fetchData();
   }, []);
   return (
@@ -20,6 +22,7 @@ const Main = (props) => {
           <Product key={product.id} product={product} onAdd={onAdd}></Product>
         ))}
       </div>
+      )
     </main>
   );
 };
