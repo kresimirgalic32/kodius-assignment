@@ -5,7 +5,8 @@ import userRouter from "./routers/userRouter.js";
 
 const app = express();
 
-mongoose.connect("mongodb://localhost/kodius");
+// eslint-disable-next-line no-undef
+mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/kodius");
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
