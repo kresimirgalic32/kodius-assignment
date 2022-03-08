@@ -31,6 +31,7 @@ function App() {
       );
     }
   };
+
   return (
     <div className="App">
       <Header countCartItems={cartItems.length}></Header>
