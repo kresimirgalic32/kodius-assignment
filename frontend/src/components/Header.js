@@ -4,12 +4,12 @@ const Header = (props) => {
   return (
     <header className="block row center">
       <div>
-        <a href="#/">
+        <a href="/">
           <h1>Small Shopping Cart</h1>
         </a>
       </div>
       <div>
-        <a href="#/cart">
+        <a href="/cart">
           Cart{" "}
           {props.countCartItems ? (
             <button className="badge">{props.countCartItems}</button>
@@ -17,7 +17,7 @@ const Header = (props) => {
             ""
           )}
         </a>{" "}
-        <a href="#/signin"> SignIn</a>
+        <a href="/signin"> Sign In</a>
       </div>
     </header>
   );
