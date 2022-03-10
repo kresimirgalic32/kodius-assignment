@@ -13,7 +13,8 @@ const Home = () => {
       setCartItems(
         cartItems.map((x) =>
           x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        )
+        ),
+        localStorage.setItem("userInfo", JSON.stringify(data))
       );
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);

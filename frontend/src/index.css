@@ -1,6 +1,7 @@
 body {
   font-family: "Helvetica";
 }
+
 h1,
 h2,
 h3 {
@@ -17,7 +18,9 @@ h3 {
 }
 a {
   text-decoration: none;
+  color: black;
 }
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -66,4 +69,49 @@ button.badge {
   border: none;
   color: #ffffff;
   width: 1.5rem;
+}
+/* Form */
+
+.form {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+.form > div {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.form label {
+  margin: 1rem 0;
+  display: block;
+}
+
+/* Dropdown */
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dropdown-content {
+  position: absolute;
+  display: none;
+  right: 0;
+  min-width: 12rem;
+  padding: 1rem;
+  z-index: 1;
+  background-color: #203040;
+  margin: 0;
+  /* margin-top: 0.1rem; */
+  border-radius: 0.5rem;
+  color: white;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.test {
+  color: white;
+}
+.space {
+  padding-left: 20px;
 }

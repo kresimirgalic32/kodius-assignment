@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import Product from "./Product";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../actions/productActions";
 
 const Main = (props) => {
-  const { test, onAdd } = props;
-  const [products, setProducts] = useState([]);
+  // const [products1, setProducts1] = useState([]);
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const { product } = productList;
+  const { products, onAdd } = props;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data);
-    };
-
-    fetchData();
-  }, []);
+    dispatch(listProducts({}));
+  }, [dispatch]);
   return (
     <main className="block col-2">
       <h2>Products</h2>
