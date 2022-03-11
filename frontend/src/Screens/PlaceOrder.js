@@ -34,7 +34,7 @@ const PlaceOrder = () => {
                 <h2>Payment</h2>
                 <p>
                   <strong>Method: </strong>
-                  {cart.paymentMethod}{" "}
+                  {"Credit Card"}{" "}
                 </p>
               </div>
             </li>
@@ -42,34 +42,20 @@ const PlaceOrder = () => {
               <div className="card card-body">
                 <h2>Ordered Items</h2>
                 <div className="block col-1">
-                  {/* <Header></Header> */}
                   <h2>Cart Items</h2>
                   <div>
                     {cart.cartItems.length === 0 && <div>Cart is empty</div>}
                     {cart.cartItems.map((item) => (
                       <div key={item.id} className="row">
                         <div className="col-1">{item.name}</div>
-                        {/* <div className="col-2">
-                          <button
-                            onClick={() => onRemove(item)}
-                            className="remove"
-                          >
-                            -
-                          </button>{" "}
-                          <button onClick={() => onAdd(item)} className="add">
-                            +
-                          </button>
-                        </div> */}
 
                         <div className="col-1">
                           {item.qty} x €{item.price.toFixed(2)}
                         </div>
                       </div>
                     ))}
-
                     {cart.cartItems.length !== 0 && (
                       <>
-                        {/* <hr></hr> */}
                         <div className="row">
                           <div className="col-1">discount</div>
                           {/* <div className="col-1 text-right">€{discount.toFixed(2)}</div> */}
@@ -83,7 +69,7 @@ const PlaceOrder = () => {
                             <strong>€{cart.totalPrice.toFixed(2)}</strong>
                           </div>
                         </div>
-                        {/* <hr /> */}
+
                         <div className="row">
                           <button
                             type="button"
