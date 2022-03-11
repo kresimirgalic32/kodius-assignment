@@ -1,11 +1,18 @@
 import React from "react";
+import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 const Basket = (props) => {
   const { cartItems, onAdd, onRemove } = props;
 
   const totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const navigate = useNavigate();
+  const checkoutHandler = () => {
+    navigate("/signin?redirect=/shipping");
+  };
   return (
-    <aside className="block col-1">
+    <div className="block col-1">
+      {/* <Header></Header> */}
       <h2>Cart Items</h2>
       <div>
         {cartItems.length === 0 && <div>Cart is empty</div>}
@@ -29,7 +36,7 @@ const Basket = (props) => {
 
         {cartItems.length !== 0 && (
           <>
-            <hr></hr>
+            {/* <hr></hr> */}
             <div className="row">
               <div className="col-2">discount</div>
               {/* <div className="col-1 text-right">€{discount.toFixed(2)}</div> */}
@@ -43,16 +50,21 @@ const Basket = (props) => {
                 <strong>€{totalPrice.toFixed(2)}</strong>
               </div>
             </div>
-            <hr />
+            {/* <hr /> */}
             <div className="row">
-              <button onClick={() => alert("Implement Checkout!")}>
+              <button
+                type="button"
+                onClick={checkoutHandler}
+                className="primary block"
+                disabled={cartItems.length === 0}
+              >
                 Checkout
               </button>
             </div>
           </>
         )}
       </div>
-    </aside>
+    </div>
   );
 };
 

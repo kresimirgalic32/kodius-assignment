@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { signin } from "../actions/userActions";
 import Header from "../components/Header";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
 
 const Signin = (props) => {
   const navigate = useNavigate();
@@ -15,7 +13,7 @@ const Signin = (props) => {
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/";
   const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo, error, loading } = userSignin;
+  const { userInfo } = userSignin;
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {

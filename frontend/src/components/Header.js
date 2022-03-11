@@ -15,17 +15,18 @@ const Header = (props) => {
       <div>
         <a href="/">
           <h1>Kodius</h1>
+          {/* <button onClick={signoutHandler}></button> */}
         </a>
       </div>
       <div>
-        <a href="/cart">
+        <Link to="/cart">
           Cart{" "}
           {props.countCartItems ? (
             <button className="badge">{props.countCartItems}</button>
           ) : (
-            ""
+            " "
           )}
-        </a>{" "}
+        </Link>{" "}
         {userInfo ? (
           <div className="dropdown space">
             <Link to="#">
