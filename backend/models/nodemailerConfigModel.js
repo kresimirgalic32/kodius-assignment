@@ -1,4 +1,5 @@
-// const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
+// const nodemailer = import("nodemailer");
 // var xoauth2 = require("xoauth2");
 // const user = "passdirect11@gmail.com";
 // const pass = "passdirect123456789";
@@ -29,7 +30,13 @@
 // module.exports.sendConfirmationEmail
 
 let mailTransporter = nodemailer.createTransport({
-  service: "gmail",
+  // service: "gmail",
+  host: "smtp.gmail.com",
+  secureConnection: false,
+  secure: false,
+  port: 587,
+  requiresAuth: true,
+  domains: ["gmail.com", "googlemail.com"],
   auth: {
     user: "passdirect11@gmail.com",
     pass: "passdirect123456789",
@@ -45,6 +52,7 @@ let mailDetails = {
 
 mailTransporter.sendMail(mailDetails, function (err) {
   if (err) {
+    console.log(err);
     console.log("Error Occurs");
   } else {
     console.log("Email sent successfully");

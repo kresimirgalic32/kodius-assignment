@@ -8,7 +8,7 @@ const Signin = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/";
@@ -27,7 +27,7 @@ const Signin = (props) => {
   }, [navigate, redirect, userInfo]);
   return (
     <div>
-      <Header countCartItems={cartItems.length}></Header>
+      {/* <Header countCartItems={cartItems.length}></Header> */}
 
       <form className="form" onSubmit={submitHandler}>
         <div>

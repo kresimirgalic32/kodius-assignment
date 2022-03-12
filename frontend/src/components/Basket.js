@@ -1,30 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveCartItems } from "../actions/cartActions";
 // import { quantityDiscount } from "../Screens/Home";
 
 const Basket = (props) => {
-  const cart = useSelector((state) => state.cart);
+  // const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
+  // const cart = useSelector((state) => state.cart);
   const { cartItems, onAdd, onRemove } = props;
-  const toNum = (qty) => Number(qty.toFixed(0));
+  // const toNum = (qty) => Number(qty.toFixed(0));
+  // const [cartItems, setCartItems] = useState([cartItemsLoad]);
 
-  //  const { cartItems } = cart;
+  // useEffect(() => {
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  // }, [cartItems]);
+  // const { cartItems } = cart;
   const totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const navigate = useNavigate();
   const checkoutHandler = () => {
     navigate("/signin?redirect=/shipping");
   };
-  const [qty, setQty] = useState(cartItems.qty || "");
-  const [name, setName] = useState(cartItems.name || "");
-  const [id, setId] = useState(cartItems.id || "");
+  // const [qty, setQty] = useState(cartItems.qty || "");
+  // const [name, setName] = useState(cartItems.name || "");
+  // const [id, setId] = useState(cartItems.id || "");
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveCartItems({ qty, name, id }));
+    // dispatch(saveCartItems({ qty, name, id }));
     navigate("/shipping");
   };
+
   // const quantityDiscount = (product) => {
   //   const exist = cartItems.find((x) => x.id === product.id);
   //   if (exist.qty > 3) {
@@ -40,9 +46,21 @@ const Basket = (props) => {
   // const discount = quantityDiscount(qty) * 20;
   // const discount = quantityDiscount.reduce((a, c) => a + c.number * c.def);
   // const discount = quantityDiscount();
+
+  // const varijabla = JSON.parse(localStorage.getItem("cartItems"));
+  // console.log(varijabla);
+
   return (
     <div className="block col-1">
-      <form className="form" onSubmit={submitHandler}>
+      <form
+        className="form"
+        onSubmit={submitHandler}
+        // onChange={(e) => {
+        //   setQty(e.target.value);
+        //   setName(e.target.value);
+        //   setId(e.target.value);
+        // }}
+      >
         <h2>Cart Items</h2>
         <div>
           {cartItems.length === 0 && <div>Cart is empty</div>}
@@ -83,6 +101,7 @@ const Basket = (props) => {
               <div className="row">
                 <div className="col-2">
                   <strong>Total Price</strong>
+                  {console.log("total price " + totalPrice)}
                 </div>
                 <div className="col-1 text-right">
                   <strong>€{totalPrice.toFixed(2)}</strong>

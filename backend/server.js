@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // eslint-disable-next-line no-undef
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/kodius");
+mongoose.connect(process.env.MONGODB_URI_LOCAL || "mongodb://localhost/kodius");
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);

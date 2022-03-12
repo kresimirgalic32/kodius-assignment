@@ -8,7 +8,7 @@ import expressAsyncHandler from "express-async-handler";
 
 const placeOrderRouter = express.Router();
 
-// var mail = require("../models/nodemailerConfigModel.js")();
+var mail = import("../models/nodemailerConfigModel.js");
 placeOrderRouter.post(
   "/placeorder",
   expressAsyncHandler(async () => {

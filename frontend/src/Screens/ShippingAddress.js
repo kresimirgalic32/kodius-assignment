@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../actions/cartActions";
 import CheckoutSteps from "../components/CheckoutSteps";
+// import Header from "../components/Header";
 
 const ShippingAddress = () => {
+  // const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
+  // const [cartItems, setCartItems] = useState(cartItemsLoad);
   const navigate = useNavigate();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -31,6 +34,7 @@ const ShippingAddress = () => {
 
   return (
     <div>
+      {/* <Header countCartItems={cartItems.length}></Header> */}
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>

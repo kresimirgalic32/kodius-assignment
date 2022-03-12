@@ -5,11 +5,14 @@ import Header from "../components/Header";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// import cartItemsLoad from "./Home";
 import { saveCartItems } from "../actions/cartActions";
 
 const Cart = (props) => {
   // const { products } = data;
-  const [cartItems, setCartItems] = useState([]);
+  // const { cartItemsLoad } = props;
+  const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
+  const [cartItems, setCartItems] = useState(cartItemsLoad);
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -38,6 +41,7 @@ const Cart = (props) => {
     <div className="App">
       <Header countCartItems={cartItems.length}></Header>
       <Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove}></Basket>
+      {/* {console.log("cart items " + cartItems)} */}
     </div>
   );
 };

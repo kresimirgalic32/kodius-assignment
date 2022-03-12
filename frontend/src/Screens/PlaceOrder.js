@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
+import BasketOrder from "../components/BasketOrder";
 
-const PlaceOrder = () => {
-  const navigate = useNavigate();
+const PlaceOrder = (props) => {
+  const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
+  const [cartItems, setCartItems] = useState(cartItemsLoad);
+
+  const { totalPrice } = props;
   const cart = useSelector((state) => state.cart);
+  // const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
+  // cart.totalPrice = toPrice(cartItems.reduce((a, c) => a + c.qty * c.price, 0));
+  const navigate = useNavigate();
   if (!cart.paymentMethod) {
     navigate("/payment");
   }
@@ -14,7 +21,7 @@ const PlaceOrder = () => {
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
-      <div className="row top">
+      <div className="block row top">
         <div className=""></div>
         <div className="col-1">
           <ul>
@@ -40,8 +47,9 @@ const PlaceOrder = () => {
             </li>
             <li>
               <div className="card card-body">
-                <h2>Ordered Items</h2>
-                <div className="block col-1">
+                {/* <h2>Ordered Items</h2> */}
+                <BasketOrder cartItems={cartItems}></BasketOrder>
+                {/* <div className="block col-1">
                   <h2>Cart Items</h2>
                   <div>
                     {cart.cartItems.length === 0 && <div>Cart is empty</div>}
@@ -52,13 +60,17 @@ const PlaceOrder = () => {
                         <div className="col-1">
                           {item.qty} x €{item.price.toFixed(2)}
                         </div>
+                        <div className="col-1 ">
+                          <strong>€{totalPrice}</strong>
+                          {console.log("total price" + totalPrice)}
+                        </div>
                       </div>
                     ))}
                     {cart.cartItems.length !== 0 && (
                       <>
                         <div className="row">
                           <div className="col-1">discount</div>
-                          {/* <div className="col-1 text-right">€{discount.toFixed(2)}</div> */}
+                          <div className="col-1 text-right"></div>
                         </div>
 
                         <div className="row">
@@ -66,7 +78,14 @@ const PlaceOrder = () => {
                             <strong>Total Price</strong>
                           </div>
                           <div className="col-1 ">
-                            <strong>€{cart.totalPrice.toFixed(2)}</strong>
+                            <strong>
+                              €
+                              {cart.cartItems.reduce(
+                                (a, c) => a + c.qty * c.price,
+                                0
+                              )}
+                            </strong>
+                            {console.log("total price " + totalPrice)}
                           </div>
                         </div>
 
@@ -83,7 +102,7 @@ const PlaceOrder = () => {
                       </>
                     )}
                   </div>
-                </div>
+                </div> */}
               </div>
             </li>
           </ul>

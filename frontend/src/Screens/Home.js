@@ -2,20 +2,31 @@ import Header from "../components/Header";
 import Main from "../components/Main";
 import Basket from "../components/Basket";
 import data from "../data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import { saveCartItems } from "../actions/cartActions";
+const Home = (props) => {
+  const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
 
-const Home = () => {
   const { products } = data;
-  const [cartItems, setCartItems] = useState([]);
+
+  const [cartItems, setCartItems] = useState(cartItemsLoad);
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const toNum = (qty) => Number(qty.toFixed(0));
   const onAdd = (product) => {
+    // saveCartItems(product);
+    // const varijabla = JSON.parse(localStorage.getItem("cartItems"));
+    // console.log(varijabla);
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
           x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        ),
-        localStorage.setItem("userInfo", JSON.stringify(data))
+        )
+        // console.log("test")
+        // localStorage.setItem("userInfo", JSON.stringify(data))
       );
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
@@ -33,6 +44,7 @@ const Home = () => {
       );
     }
   };
+
   const quantityDiscount = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist.qty > 3) {

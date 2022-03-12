@@ -20,7 +20,9 @@ a {
   text-decoration: none;
   color: black;
 }
-
+li {
+  list-style-type: none;
+}
 .row {
   display: flex;
   justify-content: space-between;
@@ -39,6 +41,9 @@ a {
   padding: 1rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
+}
+.spacer {
+  margin-top: 20px;
 }
 .text-right {
   text-align: right;
