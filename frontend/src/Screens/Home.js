@@ -7,6 +7,7 @@ import { useState } from "react";
 const Home = () => {
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
+  const toNum = (qty) => Number(qty.toFixed(0));
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -32,6 +33,15 @@ const Home = () => {
       );
     }
   };
+  const quantityDiscount = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist.qty > 3) {
+      if (exist.name === "Motion Sensor") {
+        const a = toNum(exist.qty / 3);
+        console.log(a);
+      }
+    }
+  };
 
   return (
     <div className="App">
@@ -43,6 +53,14 @@ const Home = () => {
           onAdd={onAdd}
           onRemove={onRemove}
         ></Basket>
+      </div>
+
+      <div className="block">
+        <h1>DISCLAIMER: </h1>
+        <h2>
+          This is not a webpage for selling, it's only used as a test, do not
+          enter your real credit card details.
+        </h2>
       </div>
     </div>
   );

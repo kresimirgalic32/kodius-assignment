@@ -21,7 +21,6 @@ const Main = (props) => {
           <Product key={product.id} product={product} onAdd={onAdd}></Product>
         ))}
       </div>
-      )
     </main>
   );
 };

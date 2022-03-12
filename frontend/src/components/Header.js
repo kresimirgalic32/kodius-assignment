@@ -30,12 +30,14 @@ const Header = (props) => {
         {userInfo ? (
           <div className="dropdown space">
             <Link to="#">
-              {userInfo.name} <i clasname="fa fa-caret-down"></i>
+              {userInfo.name} <i clasname="fa fa-caret-down"></i>{" "}
             </Link>
             <ul className="dropdown-content">
-              <Link to="#signout" onClick={signoutHandler} className="test">
-                Sign Out
-              </Link>
+              <li>
+                <Link to="#signout" onClick={signoutHandler} className="test">
+                  Sign Out
+                </Link>
+              </li>
             </ul>
           </div>
         ) : (

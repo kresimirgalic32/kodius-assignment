@@ -4,7 +4,7 @@ import Home from "../Screens/Home";
 import Register from "../Screens/Register";
 import Signin from "../Screens/Signin";
 // import Checkout from "../Screens/ShippingAddress";
-import Cart from "./Basket";
+import Cart from "../Screens/Cart";
 import data from "../data";
 import ShippingAddress from "../Screens/ShippingAddress";
 import PaymentMethod from "../Screens/PaymentMethod";
@@ -17,7 +17,7 @@ const index = (props) => {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        {/* <Route path="/cart" element={<Cart />} /> */}
+        <Route path="/cart" element={<Cart />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/register" element={<Register />} />
         <Route path="/shipping" element={<ShippingAddress />} />

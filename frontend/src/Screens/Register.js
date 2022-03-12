@@ -37,7 +37,7 @@ const Register = (props) => {
     <div>
       <Header countCartItems={cartItems.length}></Header>
 
-      <form action="form" onSubmit={submitHandler}>
+      <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Create Account</h1>
         </div>

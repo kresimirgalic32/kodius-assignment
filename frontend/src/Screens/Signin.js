@@ -29,7 +29,7 @@ const Signin = (props) => {
     <div>
       <Header countCartItems={cartItems.length}></Header>
 
-      <form action="form" onSubmit={submitHandler}>
+      <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Sign In</h1>
         </div>

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveCartItems } from "../actions/cartActions";
+// import { quantityDiscount } from "../Screens/Home";
 
 const Basket = (props) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems, onAdd, onRemove } = props;
+  const toNum = (qty) => Number(qty.toFixed(0));
 
   //  const { cartItems } = cart;
   const totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
@@ -23,6 +25,21 @@ const Basket = (props) => {
     dispatch(saveCartItems({ qty, name, id }));
     navigate("/shipping");
   };
+  // const quantityDiscount = (product) => {
+  //   const exist = cartItems.find((x) => x.id === product.id);
+  //   if (exist.qty > 3) {
+  //     if (exist.name === "Motion Sensor") {
+  //       const number = toNum(exist.qty / 3);
+  //       return number;
+
+  //     }
+  //   }
+  // };
+  // const def = 20;
+
+  // const discount = quantityDiscount(qty) * 20;
+  // const discount = quantityDiscount.reduce((a, c) => a + c.number * c.def);
+  // const discount = quantityDiscount();
   return (
     <div className="block col-1">
       <form className="form" onSubmit={submitHandler}>
@@ -33,10 +50,18 @@ const Basket = (props) => {
             <div key={item.id} className="row">
               <div className="col-2">{item.name}</div>
               <div className="col-2">
-                <button onClick={() => onRemove(item)} className="remove">
+                <button
+                  type="button"
+                  onClick={() => onRemove(item)}
+                  className="remove"
+                >
                   -
                 </button>{" "}
-                <button onClick={() => onAdd(item)} className="add">
+                <button
+                  type="button"
+                  onClick={() => onAdd(item)}
+                  className="add"
+                >
                   +
                 </button>
               </div>
@@ -66,9 +91,9 @@ const Basket = (props) => {
               {/* <hr /> */}
               <div className="row">
                 <button
-                  type="button"
-                  onClick={checkoutHandler}
-                  className="primary block"
+                  type="submit"
+                  // onClick={checkoutHandler}
+                  className="primary"
                   disabled={cartItems.length === 0}
                 >
                   Checkout

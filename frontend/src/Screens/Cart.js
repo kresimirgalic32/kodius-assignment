@@ -1,10 +1,14 @@
-import React from "react";
-import Basket from "../components/Basket";
+import React, { useState } from "react";
 import data from "../data";
-import { useState } from "react";
+import Basket from "../components/Basket";
+import Header from "../components/Header";
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { saveCartItems } from "../actions/cartActions";
 
 const Cart = (props) => {
-  const { products } = data;
+  // const { products } = data;
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -31,7 +35,8 @@ const Cart = (props) => {
     }
   };
   return (
-    <div>
+    <div className="App">
+      <Header countCartItems={cartItems.length}></Header>
       <Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove}></Basket>
     </div>
   );
