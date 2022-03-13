@@ -1,4 +1,8 @@
+import { createVerify } from "crypto";
+
 import nodemailer from "nodemailer";
+import mailDetails from "../routers/placeOrderRouter.js";
+// import users from "../data";
 // const nodemailer = import("nodemailer");
 // var xoauth2 = require("xoauth2");
 // const user = "passdirect11@gmail.com";
@@ -43,18 +47,22 @@ let mailTransporter = nodemailer.createTransport({
   },
 });
 
-let mailDetails = {
-  from: "passdirect11@gmail.com",
-  to: "kresimir.galic32@gmail.com",
-  subject: "Test mail",
-  text: "Node.js testing mail for GeeksforGeeks",
+const sendMail = (email, text, cb) => {
+  const mailDetails = {
+    from: "passdirect11@gmail.com",
+    to: email,
+    subject: "Test mail",
+    text: text,
+  };
+  mailTransporter.sendMail(mailDetails, function (err, data) {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, data);
+      console.log(text);
+    }
+  });
 };
 
-mailTransporter.sendMail(mailDetails, function (err) {
-  if (err) {
-    console.log(err);
-    console.log("Error Occurs");
-  } else {
-    console.log("Email sent successfully");
-  }
-});
+// sendMail(', ', ', fun')
+export default sendMail;

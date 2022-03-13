@@ -42,14 +42,57 @@ const Basket = (props) => {
   //   }
   // };
   // const def = 20;
+  // function quantityDiscount(qty, name) {
+  //   if (qty.name === "Motion Sensor") {
+  //     if (qty.qty > 2) {
+  //       // console.log(cartItems);
+  //       console.log(qty);
+  //       const divide = (num) => Number(num.toFixed(0));
+  //       const number = divide((qty.qty - 1) / 3);
+  //       console.log("number " + number);
+  //       return number;
+  //     } else {
+  //       const number = 0;
+  //       console.log("number " + number);
 
-  // const discount = quantityDiscount(qty) * 20;
+  //       return number;
+  //     }
+  //   }
+  // }
+  // var discount = 0;
+  // discount = cartItems.forEach(quantityDiscount);
+
+  // for (var i in cartItems) {
+  // function quantityDiscount(qty, name) {
+  //   cartItems.map((item) => {
+  //     console.log(name);
+  //     console.log("test");
+
+  //     if (name === "Motion Sensor") {
+  //       if (qty.qty > 2) {
+  //         console.log(qty);
+  //         const divide = (num) => Number(num.toFixed(0));
+  //         const number = divide((qty - 1) / 3);
+  //         console.log("number " + number);
+  //         return number;
+  //       }
+  //       const number = 0;
+  //       console.log("number " + number);
+
+  //       return number;
+  //     }
+  //   });
+  // }
+  // quantityDiscount(cartItems);
+  // var discount = quantityDiscount(cartItems);
+  // discount = quantityDiscount(cartItems);
+
   // const discount = quantityDiscount.reduce((a, c) => a + c.number * c.def);
   // const discount = quantityDiscount();
 
   // const varijabla = JSON.parse(localStorage.getItem("cartItems"));
   // console.log(varijabla);
-
+  var discount = 0;
   return (
     <div className="block col-1">
       <form
@@ -85,7 +128,7 @@ const Basket = (props) => {
               </div>
 
               <div className="col-2 text-right">
-                {item.qty} x €{item.price.toFixed(2)}
+                {item.qty} x {item.price.toFixed(2)}€
               </div>
             </div>
           ))}
@@ -95,16 +138,26 @@ const Basket = (props) => {
               {/* <hr></hr> */}
               <div className="row">
                 <div className="col-2">discount</div>
-                {/* <div className="col-1 text-right">€{discount.toFixed(2)}</div> */}
+                {cartItems.map((item) => (
+                  <div className="col-1 text-right">
+                    {(discount =
+                      item.name === "Motion Sensor"
+                        ? item.qty > 2
+                          ? item.qty / 3
+                          : null
+                        : null) * 10}
+                    {console.log("discount = " + discount)}
+                  </div>
+                ))}
+                <div className="col-1 text-right"></div>
               </div>
 
               <div className="row">
                 <div className="col-2">
                   <strong>Total Price</strong>
-                  {console.log("total price " + totalPrice)}
                 </div>
                 <div className="col-1 text-right">
-                  <strong>€{totalPrice.toFixed(2)}</strong>
+                  <strong>{totalPrice.toFixed(2)}€</strong>
                 </div>
               </div>
               {/* <hr /> */}

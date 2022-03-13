@@ -3,7 +3,40 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
 import BasketOrder from "../components/BasketOrder";
+import Axios from "axios";
+import {
+  USER_SIGNIN_FAIL,
+  USER_SIGNIN_REQUEST,
+  USER_SIGNIN_SUCCESS,
+} from "../constants/userConstants";
 
+// export const signin = (email, password) => (dispatch) => {
+//   try {
+//     const { data } = await Axios.post("/api/users/signin", {
+//       email,
+//       password,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   // const placeOrderHandler = () => {};
+// };
+// export const signin = (email, password) => async (dispatch) => {
+//   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
+//   try {
+//     const { data } = await Axios.post("/api/users/signin", { email, password });
+//     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+//     localStorage.setItem("userInfo", JSON.stringify(data));
+//   } catch (error) {
+//     dispatch({
+//       type: USER_SIGNIN_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
 const PlaceOrder = (props) => {
   const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
   const [cartItems, setCartItems] = useState(cartItemsLoad);
@@ -16,7 +49,6 @@ const PlaceOrder = (props) => {
   if (!cart.paymentMethod) {
     navigate("/payment");
   }
-  const placeOrderHandler = () => {};
 
   return (
     <div>

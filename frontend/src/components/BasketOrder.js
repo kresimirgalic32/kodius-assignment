@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveCartItems } from "../actions/cartActions";
 
-const basketOrder = (props) => {
+const BasketOrder = (props) => {
   //   const cart = useSelector((state) => state.cart);
   const { cartItems } = props;
 
@@ -11,11 +11,45 @@ const basketOrder = (props) => {
   //   const navigate = useNavigate();
 
   //   const dispatch = useDispatch();
+  // console.log("test");
+  // dispatch(saveCartItems({ qty, name, id }));
+  // navigate("/shipping");
+  const [data, setData] = useState({
+    email: localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo")).email
+      : null,
+    ids: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : null,
+    // names: localStorage.getItem("cartItems")
+    //   ? JSON.parse(localStorage.getItem("cartItems")).name
+    //   : null,
+    // prices: localStorage.getItem("cartItems")
+    //   ? JSON.parse(localStorage.getItem("cartItems")).price
+    //   : null,
+  });
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(saveCartItems({ qty, name, id }));
-    // navigate("/shipping");
+    // console.log("VALUES");
+    // console.log(JSON.parse(localStorage.getItem("cartItems"))[0].id);
+    // console.log(JSON.parse(localStorage.getItem("cartItems")));
+    // console.log(JSON.parse(localStorage.getItem("userInfo")));
+    // console.log(localStorage.getItem("email"));
+
+    // console.log(data.email);
+    // const handleFormSubmit = (e) => {
+    // fetch("/api/placeorder", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   credentials: "same-origin",
+    //   body: JSON.stringify(data),
+    // }).then(function (response) {
+    //   return response.json();
+    // });
   };
+
   return (
     <div>
       {" "}
@@ -72,4 +106,4 @@ const basketOrder = (props) => {
   );
 };
 
-export default basketOrder;
+export default BasketOrder;
