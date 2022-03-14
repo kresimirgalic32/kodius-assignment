@@ -16,7 +16,7 @@ const index = (props) => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route exacth path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/register" element={<Register />} />
