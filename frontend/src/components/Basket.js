@@ -2,102 +2,194 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveCartItems } from "../actions/cartActions";
-// import { quantityDiscount } from "../Screens/Home";
 
 const Basket = (props) => {
-  // const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
-  // const cart = useSelector((state) => state.cart);
   const { cartItems, onAdd, onRemove } = props;
-  // const toNum = (qty) => Number(qty.toFixed(0));
-  // const [cartItems, setCartItems] = useState([cartItemsLoad]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  // }, [cartItems]);
-  // const { cartItems } = cart;
-  const totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const navigate = useNavigate();
   const checkoutHandler = () => {
     navigate("/signin?redirect=/shipping");
   };
-  // const [qty, setQty] = useState(cartItems.qty || "");
-  // const [name, setName] = useState(cartItems.name || "");
-  // const [id, setId] = useState(cartItems.id || "");
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(saveCartItems({ qty, name, id }));
+
     navigate("/shipping");
   };
 
-  // const quantityDiscount = (product) => {
-  //   const exist = cartItems.find((x) => x.id === product.id);
-  //   if (exist.qty > 3) {
-  //     if (exist.name === "Motion Sensor") {
-  //       const number = toNum(exist.qty / 3);
-  //       return number;
+  function round(num) {
+    return Math.floor(num);
+  }
+  var first = 0;
+  var second = 0;
+  var third = 0;
 
-  //     }
-  //   }
-  // };
-  // const def = 20;
-  // function quantityDiscount(qty, name) {
-  //   if (qty.name === "Motion Sensor") {
-  //     if (qty.qty > 2) {
-  //       // console.log(cartItems);
-  //       console.log(qty);
-  //       const divide = (num) => Number(num.toFixed(0));
-  //       const number = divide((qty.qty - 1) / 3);
-  //       console.log("number " + number);
-  //       return number;
-  //     } else {
-  //       const number = 0;
-  //       console.log("number " + number);
+  function promoCode(e) {
+    // promo.length = 0;
+    if (e === "20%OFF") {
+      if (!promo.includes("20%OFF")) {
+        if (!promo.includes("5%OFF")) {
+          setPromo([...promo, { e }]);
+          // const pom = totalPrice;
+          // var first = 0;
+          console.log(totalPrice);
+          // global first
+          console.log(first);
+          first = totalPrice / 5;
+          console.log(first);
+          return first;
 
-  //       return number;
-  //     }
-  //   }
-  // }
-  // var discount = 0;
-  // discount = cartItems.forEach(quantityDiscount);
+          // return first;
+          // console.log(first);
+          // discount = discount - first;
 
-  // for (var i in cartItems) {
-  // function quantityDiscount(qty, name) {
-  //   cartItems.map((item) => {
-  //     console.log(name);
-  //     console.log("test");
+          // promo.splice(e);
+          // promo.push(e);
+        }
+      }
+      console.log(promo);
+    } else if (e === "5%OFF") {
+      if (!promo.includes("5%OFF")) {
+        if (!promo.includes("20%OFF")) {
+          setPromo([...promo, { e }]);
+          // const pom = totalPrice;
+          return (second = totalPrice / 20);
+          // discount = discount - second;
+          // console.log(discount);
+          // promo.push(e);
 
-  //     if (name === "Motion Sensor") {
-  //       if (qty.qty > 2) {
-  //         console.log(qty);
-  //         const divide = (num) => Number(num.toFixed(0));
-  //         const number = divide((qty - 1) / 3);
-  //         console.log("number " + number);
-  //         return number;
+          // console.log(promo);
+        }
+      }
+    } else if (e === "20EUROFF") {
+      if (!promo.includes("20EUROFF")) {
+        setPromo([...promo, { e }]);
+        third = 20;
+        // discount = discount - third;
+
+        console.log(totalPrice);
+
+        // promo.push(e);
+
+        console.log(promo);
+      }
+    } else {
+      console.log(promo);
+
+      return;
+    }
+  }
+
+  var motion = 0;
+  var smoke = 0;
+
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].name === "Motion Sensor") {
+      if (cartItems[i].qty > 2) {
+        motion = round(cartItems[i].qty / 3);
+        motion = motion * 9.97;
+      } else {
+        motion = null;
+      }
+    } else if (cartItems[i].name === "Smoke Sensor") {
+      if (cartItems[i].qty > 1) {
+        smoke = round(cartItems[i].qty / 2);
+        smoke = smoke * 4.98;
+      } else {
+        smoke = null;
+      }
+    }
+  }
+
+  var discount = motion + smoke + first;
+  totalPrice = totalPrice - discount;
+
+  // var promo = [null, null, null];
+
+  // localStorage.setItem("promo", JSON.stringify(promo));
+  // promo = localStorage.getItem("promo");
+  // promo = JSON.parse(promo);
+  const promoLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
+
+  const [promo, setPromo] = useState(promoLoad);
+  // const promo = [null, null, null];
+  useEffect(() => {
+    localStorage.setItem("promo", JSON.stringify(promo));
+  }, [promo]);
+  // promo = [null, null, null];
+
+  // function promoCode(e) {
+  //   console.log(e);
+  //   // promo.length = 0;
+
+  //   if (e === "20%OFF") {
+  //     if (!promo.includes("20%OFF")) {
+  //       if (!promo.includes("5%OFF")) {
+  //         promo.push("20%OFF");
+  //         totalPrice = totalPrice - totalPrice / 5;
   //       }
-  //       const number = 0;
-  //       console.log("number " + number);
-
-  //       return number;
   //     }
-  //   });
+  //     console.log(promo);
+  //   } else if (e === "5%OFF") {
+  //     if (!promo.includes("5%OFF")) {
+  //       if (!promo.includes("20%OFF")) {
+  //         promo.push("5%OFF");
+  //         totalPrice = totalPrice - totalPrice / 20;
+
+  //         console.log(promo);
+  //       }
+  //     }
+  //   } else if (e === "20EUROFF") {
+  //     if (!promo.includes("20EUROFF")) {
+  //       promo.push("20EUROFF");
+  //       totalPrice = totalPrice - 20;
+
+  //       console.log(promo);
+  //     }
+  //   } else {
+  //     console.log(promo);
+
+  //     return;
+  //   }
   // }
-  // quantityDiscount(cartItems);
-  // var discount = quantityDiscount(cartItems);
-  // discount = quantityDiscount(cartItems);
 
-  // const discount = quantityDiscount.reduce((a, c) => a + c.number * c.def);
-  // const discount = quantityDiscount();
+  function clickHandler1(id) {
+    // id = id + 1;
+    console.log("prvi = " + id);
+    // var array = [...this.state.promo];
+    promo.splice(id, 1);
+    localStorage.setItem("promo", JSON.stringify(promo));
+    totalPrice = (totalPrice / 80) * 100;
 
-  // const varijabla = JSON.parse(localStorage.getItem("cartItems"));
-  // console.log(varijabla);
-  var discount = 0;
+    // this.setState({ promo: array });
+    // console.log(promo[id]);
+    // setPromo.splice(id, 1);
+    // promo[id] = null;
+    // promo.splice(id);
+    // setPromo({ ...promo, e: null });
+    // delete promo[id];
+    // console.log("prvi = " + id);
+  }
+  function clickHandler2(id) {
+    console.log("drugi = " + id);
+    promo.splice(id, 1);
+    localStorage.setItem("promo", JSON.stringify(promo));
+    totalPrice = (totalPrice / 95) * 100;
+    console.log(totalPrice);
+  }
+  function clickHandler3(id) {
+    console.log("treci = " + id);
+    promo.splice(id, 1);
+    localStorage.setItem("promo", JSON.stringify(promo));
+    totalPrice = totalPrice + 20;
+  }
   return (
     <div className="block col-1">
       <form
         className="form"
-        onSubmit={submitHandler}
+        // onSubmit={submitHandler}
         // onChange={(e) => {
         //   setQty(e.target.value);
         //   setName(e.target.value);
@@ -128,28 +220,59 @@ const Basket = (props) => {
               </div>
 
               <div className="col-2 text-right">
-                {item.qty} x {item.price.toFixed(2)}€
+                {item.qty} x {item.price.toFixed(2)} €
               </div>
             </div>
           ))}
+          {/* {promo.map((item) => ( */}
+
+          <div className="none"></div>
+          {promo.map((item) => (
+            <div key={item.e} className="flex">
+              <button
+                className={item.e.includes("20%OFF") ? "promo" : "none"}
+                onClick={() =>
+                  clickHandler1(promo.findIndex((item) => item.e === "20%OFF"))
+                }
+              >
+                <p>20%OFF</p>
+              </button>
+              <button
+                className={item.e.includes("5%OFF") ? "promo" : "none"}
+                onClick={() =>
+                  clickHandler2(promo.findIndex((item) => item.e === "5%OFF"))
+                }
+              >
+                <p>5%OFF</p>
+              </button>
+              <button
+                className={item.e.includes("20EUROFF") ? "promo" : "none"}
+                onClick={() =>
+                  clickHandler3(
+                    promo.findIndex((item) => item.e === "20EUROFF")
+                  )
+                }
+              >
+                <p>20EUROFF</p>
+              </button>
+            </div>
+          ))}
+
+          <input
+            type="text"
+            placeholder="Promotion Code"
+            id="promo-code"
+            onChange={(e) => promoCode(e.target.value)}
+          />
 
           {cartItems.length !== 0 && (
             <>
-              {/* <hr></hr> */}
               <div className="row">
                 <div className="col-2">discount</div>
-                {cartItems.map((item) => (
-                  <div className="col-1 text-right">
-                    {(discount =
-                      item.name === "Motion Sensor"
-                        ? item.qty > 2
-                          ? item.qty / 3
-                          : null
-                        : null) * 10}
-                    {console.log("discount = " + discount)}
-                  </div>
-                ))}
-                <div className="col-1 text-right"></div>
+
+                {/* <div className="col-1 text-right">€{discount.toFixed(2)}</div> */}
+
+                <div className="col-1 text-right">{discount.toFixed(2)} €</div>
               </div>
 
               <div className="row">
@@ -157,16 +280,17 @@ const Basket = (props) => {
                   <strong>Total Price</strong>
                 </div>
                 <div className="col-1 text-right">
-                  <strong>{totalPrice.toFixed(2)}€</strong>
+                  <div className="none"></div>
+                  <strong>{totalPrice.toFixed(2)} €</strong>
                 </div>
               </div>
-              {/* <hr /> */}
+
               <div className="row">
                 <button
-                  type="submit"
-                  // onClick={checkoutHandler}
+                  type="button"
                   className="primary"
                   disabled={cartItems.length === 0}
+                  onClick={submitHandler}
                 >
                   Checkout
                 </button>

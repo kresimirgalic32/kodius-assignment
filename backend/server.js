@@ -1,5 +1,5 @@
 import express from "express";
-import nodemailer from "nodemailer";
+//import nodemailer from "nodemailer";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRouter from "./routers/productRouter.js";
@@ -7,7 +7,8 @@ import userRouter from "./routers/userRouter.js";
 import orderRouter from "./routers/orderRouter.js";
 import placeOrderRouter from "./routers/placeOrderRouter.js";
 import path from "path";
-import sendMail from "./models/nodemailerConfigModel.js";
+//import PlaceOrder from "../frontend/src/Screens/PlaceOrder.js";
+//import sendMail from "./models/nodemailerConfigModel.js";
 
 // const nodemailer = import("nodemailer");
 // let transporter = nodemailer.createTransport({
@@ -44,18 +45,7 @@ mongoose.connect(process.env.MONGODB_URI_LOCAL || "mongodb://localhost/kodius");
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.get("/api/orders", orderRouter);
-// app.get("/api/placeorder", placeOrderRouter);
-app.post("/placeorder", (req, res) => {
-  // expressAsyncHandler(async (req, res) => {
-  const { email, product } = req.body.data;
-  console.log("test " + email);
-  sendMail(email, product, function (err, data) {
-    if (err) {
-      console.log(err);
-    }
-    console.log(email);
-  });
-});
+app.use("/api/pom", placeOrderRouter);
 
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/frontend/build")));

@@ -6,8 +6,32 @@ import { saveCartItems } from "../actions/cartActions";
 const BasketOrder = (props) => {
   //   const cart = useSelector((state) => state.cart);
   const { cartItems } = props;
+  // var discount = 0;
+  var motion = 0;
+  var smoke = 0;
 
-  const totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  for (var i = 0; i < cartItems.length; i++) {
+    if (cartItems[i].name === "Motion Sensor") {
+      if (cartItems[i].qty > 2) {
+        motion = round(cartItems[i].qty / 3);
+        motion = motion * 9.97;
+      } else {
+        motion = null;
+      }
+    } else if (cartItems[i].name === "Smoke Sensor") {
+      if (cartItems[i].qty > 1) {
+        smoke = round(cartItems[i].qty / 2);
+        smoke = smoke * 4.98;
+      } else {
+        smoke = null;
+      }
+    }
+  }
+  var discount = motion + smoke;
+  var totalPrice =
+    cartItems.reduce((a, c) => a + c.qty * c.price, 0) - discount;
+  // totalPrice = totalPrice - discount;
+
   //   const navigate = useNavigate();
 
   //   const dispatch = useDispatch();
@@ -15,12 +39,14 @@ const BasketOrder = (props) => {
   // dispatch(saveCartItems({ qty, name, id }));
   // navigate("/shipping");
   const [data, setData] = useState({
-    email: localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo")).email
+    userData: localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
       : null,
-    ids: localStorage.getItem("cartItems")
+    cartItemsData: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : null,
+    totalPriceData: totalPrice,
+    discountData: discount,
     // names: localStorage.getItem("cartItems")
     //   ? JSON.parse(localStorage.getItem("cartItems")).name
     //   : null,
@@ -35,20 +61,26 @@ const BasketOrder = (props) => {
     // console.log(JSON.parse(localStorage.getItem("cartItems")));
     // console.log(JSON.parse(localStorage.getItem("userInfo")));
     // console.log(localStorage.getItem("email"));
+    console.log(cartItems[1].name);
+
+    console.log(discount);
 
     // console.log(data.email);
     // const handleFormSubmit = (e) => {
-    // fetch("/api/placeorder", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "same-origin",
-    //   body: JSON.stringify(data),
-    // }).then(function (response) {
-    //   return response.json();
-    // });
+    fetch("/api/pom/placeorder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+      body: JSON.stringify(data),
+    }).then(function (response) {
+      return response.json();
+    });
   };
+  function round(num) {
+    return Math.floor(num);
+  }
 
   return (
     <div>
@@ -64,7 +96,7 @@ const BasketOrder = (props) => {
                 <div className="col-2"></div>
 
                 <div className="col-2 text-right">
-                  {item.qty} x €{item.price.toFixed(2)}
+                  {item.qty} x {item.price.toFixed(2)}€
                 </div>
               </div>
             ))}
@@ -75,15 +107,47 @@ const BasketOrder = (props) => {
                 <div className="row">
                   <div className="col-2">discount</div>
                   {/* <div className="col-1 text-right">€{discount.toFixed(2)}</div> */}
+                  {/* {cartItems.map((item) => (
+                    <div className="col-1 text-right">
+                      <div className="none">
+                        {
+                          (motion = round(
+                            item.name === "Motion Sensor"
+                              ? item.qty > 2
+                                ? item.qty / 3
+                                : null
+                              : null
+                          ))
+                        }
+                        {
+                          (smoke = round(
+                            item.name === "Smoke Sensor"
+                              ? item.qty > 1
+                                ? item.qty / 2
+                                : null
+                              : null
+                          ))
+                        }
+                        {(motion = motion * 9.97)}
+                        {(smoke = smoke * 4.98)}
+                        {(discount = discount + motion + smoke)}
+                      </div>
+
+                    </div>
+                  ))} */}
+                  <div className="col-1 text-right">
+                    {discount.toFixed(2)} €
+                  </div>
                 </div>
 
                 <div className="row">
                   <div className="col-2">
                     <strong>Total Price</strong>
-                    {console.log("total price " + totalPrice)}
+                    {/* {console.log("total price " + totalPrice)} */}
                   </div>
                   <div className="col-1 text-right">
-                    <strong>€{totalPrice.toFixed(2)}</strong>
+                    <div className="none"></div>
+                    <strong>{totalPrice.toFixed(2)} €</strong>
                   </div>
                 </div>
                 {/* <hr /> */}

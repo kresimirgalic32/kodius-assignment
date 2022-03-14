@@ -1,0 +1,30 @@
+// let mailTransporter = nodemailer.createTransport({
+//   host: "smtp.gmail.com",
+//   secureConnection: false,
+//   secure: false,
+//   port: 587,
+//   requiresAuth: true,
+//   domains: ["gmail.com", "googlemail.com"],
+//   auth: {
+//     user: "passdirect11@gmail.com",
+//     pass: "passdirect123456789",
+//   },
+// });
+
+// const sendMail = (email, text, cb) => {
+//   const mailDetails = {
+//     from: "passdirect11@gmail.com",
+//     to: email
+//     ,
+//     subject: "Test mail",
+//     text: text,
+//   };
+//   mailTransporter.sendMail(mailDetails, function (err, data) {
+//     if (err) {
+//       cb(err, null);
+//     } else {
+//       cb(null, data);
+//       console.log(text);
+//     }
+//   });
+// };

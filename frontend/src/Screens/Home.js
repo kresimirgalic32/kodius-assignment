@@ -45,15 +45,15 @@ const Home = (props) => {
     }
   };
 
-  const quantityDiscount = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist.qty > 3) {
-      if (exist.name === "Motion Sensor") {
-        const a = toNum(exist.qty / 3);
-        console.log(a);
-      }
-    }
-  };
+  // const quantityDiscount = (product) => {
+  //   const exist = cartItems.find((x) => x.id === product.id);
+  //   if (exist.qty > 3) {
+  //     if (exist.name === "Motion Sensor") {
+  //       const a = toNum(exist.qty / 3);
+  //       console.log(a);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="App">
