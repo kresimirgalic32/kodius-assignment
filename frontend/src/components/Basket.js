@@ -93,11 +93,15 @@ const Basket = (props) => {
   // promo = JSON.parse(promo);
   const promoLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
 
-  const [promo, setPromo] = useState(promoLoad);
+  var [promo, setPromo] = useState(promoLoad);
 
   useEffect(() => {
     localStorage.setItem("promo", JSON.stringify(promo));
   }, [promo]);
+
+  if (promo === undefined) {
+    promo = [];
+  }
 
   // function promoCode(e) {
   //   console.log(e);

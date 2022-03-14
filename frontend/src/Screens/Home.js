@@ -9,13 +9,16 @@ const Home = () => {
   const { products } = data;
   const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
 
-  const [cartItems, setCartItems] = useState(cartItemsLoad);
+  var [cartItems, setCartItems] = useState(cartItemsLoad);
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
   // const cartItems = [];
   // const [cartItems, setCartItems] = useState([{}]);
 
+  if (cartItems === undefined) {
+    cartItems = [];
+  }
   const onAdd = (product) => {
     saveCartItems(product);
     const varijabla = JSON.parse(localStorage.getItem("cartItems"));
