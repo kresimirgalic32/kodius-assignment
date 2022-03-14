@@ -4,7 +4,7 @@
 import Index from "./components";
 function App() {
   // const [cartItems, setCartItems] = useState([]);
-
+  const cartItems = [];
   // useEffect(() => {
   //   window.process = {
   //     ...window.process,
