@@ -9,7 +9,7 @@ const Home = (props) => {
 
   const { products } = data;
 
-  const [cartItems, setCartItems] = useState(cartItemsLoad);
+  const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
