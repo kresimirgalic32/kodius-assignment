@@ -2,12 +2,12 @@
 // import { useEffect } from "react";
 // import { useState } from "react";
 import Index from "./components";
+const cartItems = [];
+const promo = [];
 function App() {
   // const [cartItems, setCartItems] = useState([]);
-  const cartItems = [];
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
-  const promo = [];
   localStorage.setItem("promo", JSON.stringify(promo));
 
   // useEffect(() => {
