@@ -27,26 +27,17 @@ const Basket = (props) => {
   var third = 0;
 
   function promoCode(e) {
-    // promo.length = 0;
     if (e === "20%OFF") {
       if (!promo.includes("20%OFF")) {
         if (!promo.includes("5%OFF")) {
           setPromo([...promo, { e }]);
-          // const pom = totalPrice;
-          // var first = 0;
+
           console.log(totalPrice);
-          // global first
+
           console.log(first);
           first = totalPrice / 5;
           console.log(first);
           return first;
-
-          // return first;
-          // console.log(first);
-          // discount = discount - first;
-
-          // promo.splice(e);
-          // promo.push(e);
         }
       }
       console.log(promo);
@@ -54,30 +45,21 @@ const Basket = (props) => {
       if (!promo.includes("5%OFF")) {
         if (!promo.includes("20%OFF")) {
           setPromo([...promo, { e }]);
-          // const pom = totalPrice;
-          return (second = totalPrice / 20);
-          // discount = discount - second;
-          // console.log(discount);
-          // promo.push(e);
 
-          // console.log(promo);
+          return (second = totalPrice / 20);
         }
       }
     } else if (e === "20EUROFF") {
       if (!promo.includes("20EUROFF")) {
         setPromo([...promo, { e }]);
         third = 20;
-        // discount = discount - third;
 
         console.log(totalPrice);
-
-        // promo.push(e);
 
         console.log(promo);
       }
     } else {
       console.log(promo);
-
       return;
     }
   }
@@ -106,19 +88,16 @@ const Basket = (props) => {
   var discount = motion + smoke + first;
   totalPrice = totalPrice - discount;
 
-  // var promo = [null, null, null];
-
   // localStorage.setItem("promo", JSON.stringify(promo));
   // promo = localStorage.getItem("promo");
   // promo = JSON.parse(promo);
   const promoLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
 
   const [promo, setPromo] = useState(promoLoad);
-  // const promo = [null, null, null];
+
   useEffect(() => {
     localStorage.setItem("promo", JSON.stringify(promo));
   }, [promo]);
-  // promo = [null, null, null];
 
   // function promoCode(e) {
   //   console.log(e);
@@ -162,15 +141,6 @@ const Basket = (props) => {
     promo.splice(id, 1);
     localStorage.setItem("promo", JSON.stringify(promo));
     totalPrice = (totalPrice / 80) * 100;
-
-    // this.setState({ promo: array });
-    // console.log(promo[id]);
-    // setPromo.splice(id, 1);
-    // promo[id] = null;
-    // promo.splice(id);
-    // setPromo({ ...promo, e: null });
-    // delete promo[id];
-    // console.log("prvi = " + id);
   }
   function clickHandler2(id) {
     console.log("drugi = " + id);
@@ -187,15 +157,7 @@ const Basket = (props) => {
   }
   return (
     <div className="block col-1">
-      <form
-        className="form"
-        // onSubmit={submitHandler}
-        // onChange={(e) => {
-        //   setQty(e.target.value);
-        //   setName(e.target.value);
-        //   setId(e.target.value);
-        // }}
-      >
+      <form className="form">
         <h2>Cart Items</h2>
         <div>
           {cartItems.length === 0 && <div>Cart is empty</div>}

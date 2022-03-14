@@ -19,7 +19,7 @@ userRouter.get(
 userRouter.post(
   "/signin",
   expressAsyncHandler(async (req, res) => {
-    await User.remove({});
+    // await User.remove({});
     const user = await User.findOne({ email: req.body.email });
 
     if (user) {

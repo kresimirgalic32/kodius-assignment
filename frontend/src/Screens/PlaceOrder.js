@@ -43,8 +43,7 @@ const PlaceOrder = (props) => {
 
   const { totalPrice } = props;
   const cart = useSelector((state) => state.cart);
-  // const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
-  // cart.totalPrice = toPrice(cartItems.reduce((a, c) => a + c.qty * c.price, 0));
+
   const navigate = useNavigate();
   if (!cart.paymentMethod) {
     navigate("/payment");
