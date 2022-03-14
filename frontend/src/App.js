@@ -2,9 +2,13 @@
 // import { useEffect } from "react";
 // import { useState } from "react";
 import Index from "./components";
-const cartItems = [];
-const promo = [];
 function App() {
+  if (cartItems === undefined) {
+    var cartItems = [];
+  }
+  if (promo === undefined) {
+    var promo = [];
+  }
   // const [cartItems, setCartItems] = useState([]);
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
