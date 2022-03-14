@@ -5,6 +5,7 @@ import Index from "./components";
 function App() {
   // const [cartItems, setCartItems] = useState([]);
   const cartItems = [];
+  const promo = [];
   // useEffect(() => {
   //   window.process = {
   //     ...window.process,
