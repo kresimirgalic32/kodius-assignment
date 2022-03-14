@@ -56,6 +56,7 @@ app.get("*", (req, res) =>
 app.get("/", (req, res) => {
   res.send("Server is ready");
 });
+
 // eslint-disable-next-line no-undef
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

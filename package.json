@@ -3,10 +3,16 @@
   "type": "module",
   "version": "1.0.0",
   "main": "index.js",
+
   "scripts": {
     "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
-    "start": "node backend/server.js"
+    "start": "node backend/server.js",
+    "preinstall": "npx npm-force-resolutions"
   },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+},
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kresimirgalic32/kodius-assignment.git"
@@ -35,7 +41,8 @@
     "eslint": "^8.10.0",
     "eslint-plugin-react": "^7.29.3",
     "nodemon": "^2.0.15",
-    "tslib": "^2.3.1"
+    "tslib": "^2.3.1",
+    "react-error-overlay": "6.0.9"
   },
   "keywords": [],
   "description": ""

@@ -1,7 +1,13 @@
 // import { useEffect, useState } from "react";
+// import { useEffect } from "react";
 import Index from "./components";
-
 function App() {
+  // useEffect(() => {
+  //   window.process = {
+  //     ...window.process,
+  //   };
+  // }, []);
+
   // const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
   // const [cartItems, setCartItems] = useState(cartItemsLoad);
   // useEffect(() => {
