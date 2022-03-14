@@ -10,7 +10,7 @@ const userRouter = express.Router();
 userRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
-    // await User.remove({});
+    await User.remove({});
     const createdUsers = await User.insertMany(data.users);
     res.send({ createdUsers });
   })
@@ -19,7 +19,9 @@ userRouter.get(
 userRouter.post(
   "/signin",
   expressAsyncHandler(async (req, res) => {
+    // await User.remove({});
     const user = await User.findOne({ email: req.body.email });
+
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password))
         res.send({
