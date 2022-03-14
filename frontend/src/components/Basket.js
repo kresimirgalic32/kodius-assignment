@@ -99,7 +99,7 @@ const Basket = (props) => {
     localStorage.setItem("promo", JSON.stringify(promo));
   }, [promo]);
 
-  if (promo === undefined) {
+  if (!promo) {
     promo = [];
   }
 

@@ -16,7 +16,7 @@ const Home = () => {
   // const cartItems = [];
   // const [cartItems, setCartItems] = useState([{}]);
 
-  if (cartItems === undefined) {
+  if (!cartItems) {
     cartItems = [];
   }
   const onAdd = (product) => {
