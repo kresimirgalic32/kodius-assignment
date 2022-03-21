@@ -1,5 +1,20 @@
 import bcrypt from "bcryptjs";
 const data = {
+  promo: [
+    {
+      name: "20%OFF",
+      conjuction: false,
+    },
+    {
+      name: "5%OFF",
+      conjuction: false,
+    },
+    {
+      name: "20EUROFF",
+      conjuction: true,
+    },
+  ],
+
   users: [
     {
       name: "Kreso",

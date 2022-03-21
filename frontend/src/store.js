@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import productListReducer from "./reducers/productReducers";
 import { userRegisterReducer, userSigninReducer } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducers";
+import { promoReducer } from "./reducers/promoReducers";
 
 const initialState = {
   userSignin: {
@@ -19,6 +20,11 @@ const initialState = {
       : {},
     paymentMethod: "Credit Card",
   },
+  promo: {
+    promo: localStorage.getItem("promo")
+      ? JSON.parse(localStorage.getItem("promo"))
+      : {},
+  },
 };
 const reducer = combineReducers({
   productList: productListReducer,
@@ -26,6 +32,7 @@ const reducer = combineReducers({
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
   cart: cartReducer,
+  promo: promoReducer,
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

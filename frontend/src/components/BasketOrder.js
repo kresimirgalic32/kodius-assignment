@@ -54,19 +54,15 @@ const BasketOrder = (props) => {
     //   ? JSON.parse(localStorage.getItem("cartItems")).price
     //   : null,
   });
+  const navigate = useNavigate();
+
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log("VALUES");
-    // console.log(JSON.parse(localStorage.getItem("cartItems"))[0].id);
-    // console.log(JSON.parse(localStorage.getItem("cartItems")));
-    // console.log(JSON.parse(localStorage.getItem("userInfo")));
-    // console.log(localStorage.getItem("email"));
+
     console.log(cartItems[1].name);
 
     console.log(discount);
 
-    // console.log(data.email);
-    // const handleFormSubmit = (e) => {
     fetch("/api/pom/placeorder", {
       method: "POST",
       headers: {
@@ -77,6 +73,9 @@ const BasketOrder = (props) => {
     }).then(function (response) {
       return response.json();
     });
+
+    localStorage.removeItem("cartItems");
+    navigate("/signin?redirect=/");
   };
   function round(num) {
     return Math.floor(num);

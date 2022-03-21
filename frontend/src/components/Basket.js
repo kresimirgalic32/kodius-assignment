@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { promo } from "../actions/promoActions";
 import { saveCartItems } from "../actions/cartActions";
 
 const Basket = (props) => {
   const { cartItems, onAdd, onRemove } = props;
+  const [name, setName] = useState("");
 
   var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const navigate = useNavigate();
@@ -13,6 +15,11 @@ const Basket = (props) => {
   };
 
   const dispatch = useDispatch();
+  const promoHandler = (f) => {
+    f.preventDefault();
+    dispatch(promo(name));
+    console.log(name);
+  };
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -26,43 +33,43 @@ const Basket = (props) => {
   var second = 0;
   var third = 0;
 
-  function promoCode(e) {
-    if (e === "20%OFF") {
-      if (!promo.includes("20%OFF")) {
-        if (!promo.includes("5%OFF")) {
-          setPromo([...promo, { e }]);
+  // function promoCode(e) {
+  //   if (e === "20%OFF") {
+  //     if (!promo.includes("20%OFF")) {
+  //       if (!promo.includes("5%OFF")) {
+  //         setPromo([...promo, { e }]);
 
-          console.log(totalPrice);
+  //         console.log(totalPrice);
 
-          console.log(first);
-          first = totalPrice / 5;
-          console.log(first);
-          return first;
-        }
-      }
-      console.log(promo);
-    } else if (e === "5%OFF") {
-      if (!promo.includes("5%OFF")) {
-        if (!promo.includes("20%OFF")) {
-          setPromo([...promo, { e }]);
+  //         console.log(first);
+  //         first = totalPrice / 5;
+  //         console.log(first);
+  //         return first;
+  //       }
+  //     }
+  //     console.log(promo);
+  //   } else if (e === "5%OFF") {
+  //     if (!promo.includes("5%OFF")) {
+  //       if (!promo.includes("20%OFF")) {
+  //         setPromo([...promo, { e }]);
 
-          return (second = totalPrice / 20);
-        }
-      }
-    } else if (e === "20EUROFF") {
-      if (!promo.includes("20EUROFF")) {
-        setPromo([...promo, { e }]);
-        third = 20;
+  //         return (second = totalPrice / 20);
+  //       }
+  //     }
+  //   } else if (e === "20EUROFF") {
+  //     if (!promo.includes("20EUROFF")) {
+  //       setPromo([...promo, { e }]);
+  //       third = 20;
 
-        console.log(totalPrice);
+  //       console.log(totalPrice);
 
-        console.log(promo);
-      }
-    } else {
-      console.log(promo);
-      return;
-    }
-  }
+  //       console.log(promo);
+  //     }
+  //   } else {
+  //     console.log(promo);
+  //     return;
+  //   }
+  // }
 
   var motion = 0;
   var smoke = 0;
@@ -91,17 +98,17 @@ const Basket = (props) => {
   // localStorage.setItem("promo", JSON.stringify(promo));
   // promo = localStorage.getItem("promo");
   // promo = JSON.parse(promo);
-  const promoLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
+  // const promoLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
 
-  var [promo, setPromo] = useState(promoLoad);
+  // var [promo, setPromo] = useState(promoLoad);
 
-  useEffect(() => {
-    localStorage.setItem("promo", JSON.stringify(promo));
-  }, [promo]);
+  // useEffect(() => {
+  //   localStorage.setItem("promo", JSON.stringify(promo));
+  // }, [promo]);
 
-  if (!promo) {
-    promo = [];
-  }
+  // if (!promo) {
+  //   promo = [];
+  // }
 
   // function promoCode(e) {
   //   console.log(e);
@@ -138,30 +145,30 @@ const Basket = (props) => {
   //   }
   // }
 
-  function clickHandler1(id) {
-    // id = id + 1;
-    console.log("prvi = " + id);
-    // var array = [...this.state.promo];
-    promo.splice(id, 1);
-    localStorage.setItem("promo", JSON.stringify(promo));
-    totalPrice = (totalPrice / 80) * 100;
-  }
-  function clickHandler2(id) {
-    console.log("drugi = " + id);
-    promo.splice(id, 1);
-    localStorage.setItem("promo", JSON.stringify(promo));
-    totalPrice = (totalPrice / 95) * 100;
-    console.log(totalPrice);
-  }
-  function clickHandler3(id) {
-    console.log("treci = " + id);
-    promo.splice(id, 1);
-    localStorage.setItem("promo", JSON.stringify(promo));
-    totalPrice = totalPrice + 20;
-  }
+  // function clickHandler1(id) {
+
+  //   console.log("prvi = " + id);
+
+  //   promo.splice(id, 1);
+  //   localStorage.setItem("promo", JSON.stringify(promo));
+  //   totalPrice = (totalPrice / 80) * 100;
+  // }
+  // function clickHandler2(id) {
+  //   console.log("drugi = " + id);
+  //   promo.splice(id, 1);
+  //   localStorage.setItem("promo", JSON.stringify(promo));
+  //   totalPrice = (totalPrice / 95) * 100;
+  //   console.log(totalPrice);
+  // }
+  // function clickHandler3(id) {
+  //   console.log("treci = " + id);
+  //   promo.splice(id, 1);
+  //   localStorage.setItem("promo", JSON.stringify(promo));
+  //   totalPrice = totalPrice + 20;
+  // }
   return (
     <div className="block col-1">
-      <form className="form">
+      <form className="form" onSubmit={promoHandler}>
         <h2>Cart Items</h2>
         <div>
           {cartItems.length === 0 && <div>Cart is empty</div>}
@@ -192,7 +199,7 @@ const Basket = (props) => {
           ))}
           {/* {promo.map((item) => ( */}
 
-          <div className="none"></div>
+          {/* <div className="none"></div>
           {promo.map((item) => (
             <div key={item.e} className="flex">
               <button
@@ -222,14 +229,22 @@ const Basket = (props) => {
                 <p>20EUROFF</p>
               </button>
             </div>
-          ))}
+          ))} */}
 
           <input
             type="text"
             placeholder="Promotion Code"
             id="promo-code"
-            onChange={(e) => promoCode(e.target.value)}
+            onChange={(f) => setName(f.target.value)}
           />
+          <button
+            type="submit"
+            className="primary"
+            // disabled={cartItems.length === 0}
+            // onClick={promoHandler}
+          >
+            Promo Code
+          </button>
 
           {cartItems.length !== 0 && (
             <>
