@@ -145,10 +145,12 @@ const Basket = (props) => {
       }
     }
   }
-  var promoLocal = JSON.parse(localStorage.getItem("promo"));
-  for (var j = 0; j < promoLocal.length; ) {
-    totalPrice = eval(promoLocal[j].formula);
-    j = j + 1;
+  // var promoLocal = JSON.parse(localStorage.getItem("promo"));
+  // console.log(promoItems);
+
+  for (var j = 0; j < promoItems.length; j++) {
+    totalPrice = eval(promoItems[j].formula);
+    //   j = j + 1;
   }
 
   var discount = motion + smoke + first;
