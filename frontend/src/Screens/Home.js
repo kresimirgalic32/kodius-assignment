@@ -19,6 +19,11 @@ const Home = () => {
   if (!cartItems) {
     cartItems = [];
   }
+  const promoItemsLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
+  var [promoItems, setPromoItems] = useState(promoItemsLoad);
+  if (!promoItems) {
+    promoItems = [];
+  }
   const onAdd = (product) => {
     saveCartItems(product);
     const varijabla = JSON.parse(localStorage.getItem("cartItems"));
@@ -54,6 +59,7 @@ const Home = () => {
       <div className="row">
         <Main products={products} onAdd={onAdd}></Main>
         <Basket
+          promoItems={promoItems}
           cartItems={cartItems}
           onAdd={onAdd}
           onRemove={onRemove}

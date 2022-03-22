@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { promo } from "../actions/promoActions";
+import { promo, promoRemove } from "../actions/promoActions";
 import { saveCartItems } from "../actions/cartActions";
+import axios from "axios";
+import { stringify } from "querystring";
 
 const Basket = (props) => {
-  const { cartItems, onAdd, onRemove } = props;
+  const { promoItems, cartItems, onAdd, onRemove } = props;
+  // const promoItemsLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
+  // const [promoItems, setPromoItems] = useState(promoItemsLoad);
+
+  // if (!promoItems) {
+  //   promoItems = [];
+  // }
+  const { data } = props;
   const [name, setName] = useState("");
 
   var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
@@ -15,11 +24,56 @@ const Basket = (props) => {
   };
 
   const dispatch = useDispatch();
+
   const promoHandler = (f) => {
     f.preventDefault();
-    dispatch(promo(name));
-    console.log(name);
+
+    let testing = [];
+    testing = JSON.parse(localStorage.getItem("promo"));
+    testing = JSON.stringify(testing);
+
+    console.log("testing " + testing);
+    var substring = name;
+    stringify(substring);
+
+    if (!(testing.indexOf(substring) !== -1)) {
+      console.log(name);
+
+      dispatch(promo(name));
+      // window.location.reload();
+    }
+    // if (!(testing.indexOf(substring) !== -1)) {
+    //   let sub = JSON.parse(localStorage.getItem("promo"));
+    //   sub = JSON.stringify(sub);
+    //   console.log("sub " + sub);
+    //   if (sub.indexOf(name) !== -1) {
+    //     console.log("test");
+    //   }
+    // }
   };
+  // const promoHandler2 = (f) => {
+  //   f.preventDefault();
+  //   let testing = [];
+  //   testing = JSON.parse(localStorage.getItem("promo"));
+  //   testing = JSON.stringify(testing);
+
+  //   console.log("testing " + testing);
+  //   var substring = name;
+  //   stringify(substring);
+  //   if (!(testing.indexOf(substring) !== -1)) {
+  //     let sub = JSON.parse(localStorage.getItem("promo"));
+  //     sub = JSON.stringify(sub);
+  //     console.log("sub " + sub);
+  //     if (sub.indexOf(name) !== -1) {
+  //       console.log("test");
+  //     }
+  //   }
+  // };
+  // const promoHandler = (f) => {
+  //   f.preventDefault();
+  //   promoHandler1(f);
+  //   promoHandler2(f);
+  // };
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -91,6 +145,11 @@ const Basket = (props) => {
       }
     }
   }
+  // var promoLocal = JSON.parse(localStorage.getItem("promo"));
+  // for (var j = 0; j < promoLocal.length; ) {
+  //   if (promoLocal[j].name.includes()) {
+  //   }
+  // }
 
   var discount = motion + smoke + first;
   totalPrice = totalPrice - discount;
@@ -145,27 +204,27 @@ const Basket = (props) => {
   //   }
   // }
 
-  // function clickHandler1(id) {
-
-  //   console.log("prvi = " + id);
-
-  //   promo.splice(id, 1);
-  //   localStorage.setItem("promo", JSON.stringify(promo));
-  //   totalPrice = (totalPrice / 80) * 100;
-  // }
-  // function clickHandler2(id) {
-  //   console.log("drugi = " + id);
-  //   promo.splice(id, 1);
-  //   localStorage.setItem("promo", JSON.stringify(promo));
-  //   totalPrice = (totalPrice / 95) * 100;
-  //   console.log(totalPrice);
-  // }
-  // function clickHandler3(id) {
-  //   console.log("treci = " + id);
-  //   promo.splice(id, 1);
-  //   localStorage.setItem("promo", JSON.stringify(promo));
-  //   totalPrice = totalPrice + 20;
-  // }
+  function clickHandler(name) {
+    dispatch(promoRemove(name));
+    console.log("name " + name);
+    // console.log("prvi = " + id);
+    // promo.splice(id, 1);
+    // localStorage.setItem("promo", JSON.stringify(promo));
+    // totalPrice = (totalPrice / 80) * 100;
+  }
+  function clickHandler2(id) {
+    // console.log("drugi = " + id);
+    // promo.splice(id, 1);
+    // localStorage.setItem("promo", JSON.stringify(promo));
+    // totalPrice = (totalPrice / 95) * 100;
+    // console.log(totalPrice);
+  }
+  function clickHandler3(id) {
+    // console.log("treci = " + id);
+    // promo.splice(id, 1);
+    // localStorage.setItem("promo", JSON.stringify(promo));
+    // totalPrice = totalPrice + 20;
+  }
   return (
     <div className="block col-1">
       <form className="form" onSubmit={promoHandler}>
@@ -203,6 +262,7 @@ const Basket = (props) => {
           {promo.map((item) => (
             <div key={item.e} className="flex">
               <button
+                id="div-i"
                 className={item.e.includes("20%OFF") ? "promo" : "none"}
                 onClick={() =>
                   clickHandler1(promo.findIndex((item) => item.e === "20%OFF"))
@@ -230,6 +290,37 @@ const Basket = (props) => {
               </button>
             </div>
           ))} */}
+          <div className="flex">
+            {promoItems.map((item) => (
+              <div key={item.id}>
+                {/* <div className="promo"> */}
+                <button
+                  type="button"
+                  className="promo"
+                  onClick={() => clickHandler(item.name)}
+                >
+                  {item.name}
+                </button>
+                {/* </div> */}
+              </div>
+            ))}
+            {/* <button
+              className={
+                JSON.stringify(
+                  JSON.parse(localStorage.getItem("promo"))
+                ).includes(name)
+                  ? "promo"
+                  : "none"
+              }
+            ></button> */}
+            {/* <button id="div-2" className="promo"></button>
+            <button id="div-3" className="promo"></button>
+            <button id="div-4" className="promo"></button>
+            <button id="div-5" className="promo"></button>
+            <button id="div-6" className="promo"></button>
+            <button id="div-7" className="promo"></button>
+            <button id="div-8" className="promo"></button> */}
+          </div>
 
           <input
             type="text"
