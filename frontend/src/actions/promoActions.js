@@ -10,7 +10,19 @@ export const promo = (name) => async (dispatch) => {
   try {
     const { data } = await Axios.post("api/promo/promo", { name });
     dispatch({ type: PROMO_SUCCESS, payload: data });
-    localStorage.setItem("promo", JSON.stringify(data));
+    let test = localStorage.getItem("promo");
+    if (test === null) {
+      let list = [];
+      list.push(data);
+      localStorage.setItem("promo", JSON.stringify(list));
+    } else {
+      test = JSON.parse(test);
+
+      test.push(data);
+      localStorage.setItem("promo", JSON.stringify(test));
+    }
+
+    console.log(test);
   } catch (error) {
     dispatch({
       type: PROMO_FAIL,
@@ -25,3 +37,5 @@ export const promo = (name) => async (dispatch) => {
 // export const promoSetup = (name, conjuction) => async (dispatch) => {
 //   dispatch({});
 // };
+
+// import promo from "./actions/promoActions"

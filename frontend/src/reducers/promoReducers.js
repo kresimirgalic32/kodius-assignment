@@ -3,7 +3,7 @@ import {
   PROMO_SUCCESS,
   PROMO_FAIL,
 } from "../constants/promoConstants";
-export const promoReducer = (state = {}, action) => {
+export const promoReducer = (state = { promo: [] }, action) => {
   switch (action.type) {
     case PROMO_REQUEST:
       return { loading: true };
