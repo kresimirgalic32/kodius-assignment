@@ -6,6 +6,8 @@ import { saveCartItems } from "../actions/cartActions";
 const BasketOrder = (props) => {
   //   const cart = useSelector((state) => state.cart);
   const { cartItems } = props;
+  var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+
   // var discount = 0;
   var motion = 0;
   var smoke = 0;
@@ -27,9 +29,15 @@ const BasketOrder = (props) => {
       }
     }
   }
+
+  var promoLocal = JSON.parse(localStorage.getItem("promo"));
+  for (var j = 0; j < promoLocal.length; ) {
+    totalPrice = eval(promoLocal[j].formula);
+    j = j + 1;
+  }
   var discount = motion + smoke;
-  var totalPrice =
-    cartItems.reduce((a, c) => a + c.qty * c.price, 0) - discount;
+  totalPrice = totalPrice - discount;
+
   // totalPrice = totalPrice - discount;
 
   //   const navigate = useNavigate();

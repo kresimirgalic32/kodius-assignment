@@ -25,6 +25,7 @@ promoRouter.post(
         id: promo._id,
         name: promo.name,
         conjuction: promo.conjuction,
+        formula: promo.formula,
       });
     return;
   })
@@ -35,12 +36,14 @@ promoRouter.post(
     const promo = new Promo({
       name: req.body.name,
       conjuction: req.body.conjuction,
+      formula: req.body.formula,
     });
     const createdPromo = await promo.save();
     res.send({
       id: createdPromo._id,
       name: createdPromo.name,
       conjuction: createdPromo.conjuction,
+      formula: createdPromo.formula,
     });
   })
 );

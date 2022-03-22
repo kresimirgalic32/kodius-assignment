@@ -72,6 +72,15 @@ const Home = () => {
           enter your real credit card details.
         </h2>
       </div>
+      <div className="block">
+        <h1>Discounts:</h1>
+        <h2>3 Motion Sensors for 65 EUR</h2>
+        <h2>2 Smoke Sensors for 35 EUR</h2>
+        <h1>Promotion Codes:</h1>
+        <h2>20%OFF</h2>
+        <h2>5%OFF</h2>
+        <h2>20EUROFF - Applicable in conjuction with other promotion codes</h2>
+      </div>
     </div>
   );
 };
