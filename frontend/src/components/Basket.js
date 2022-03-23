@@ -76,7 +76,7 @@ const Basket = (props) => {
   // };
   const submitHandler = (e) => {
     e.preventDefault();
-
+    // dispatch(saveCartItems({}))
     navigate("/shipping");
   };
 

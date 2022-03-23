@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveCartItems } from "../actions/cartActions";
+import { createOrder } from "../actions/orderActions";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 const BasketOrder = (props) => {
-  //   const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+  const orderCreate = useSelector((state) => state.orderCreate);
+
+  const { success, order } = orderCreate;
   const { cartItems } = props;
   var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
 
@@ -63,11 +68,13 @@ const BasketOrder = (props) => {
     //   : null,
   });
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(cartItems);
 
-    console.log(cartItems[1].name);
+    dispatch(createOrder({ ...cart, orderItems: cartItems }));
+    // console.log(cartItems[1].name);
 
     console.log(discount);
 
@@ -85,6 +92,13 @@ const BasketOrder = (props) => {
     localStorage.removeItem("cartItems");
     navigate("/signin?redirect=/");
   };
+
+  useEffect(() => {
+    if (success) {
+      props.history.push(`/order.${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [dispatch, order, props.history, success]);
   function round(num) {
     return Math.floor(num);
   }

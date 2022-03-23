@@ -19,10 +19,13 @@ const Home = () => {
   if (!cartItems) {
     cartItems = [];
   }
-  const promoItemsLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
-  var [promoItems, setPromoItems] = useState(promoItemsLoad);
-  if (!promoItems) {
-    promoItems = [];
+  const promoLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
+  var [promo, setPromo] = useState(promoLoad);
+  useEffect(() => {
+    localStorage.setItem("promo", JSON.stringify(promo));
+  }, [promo]);
+  if (!promo) {
+    promo = [];
   }
   const onAdd = (product) => {
     saveCartItems(product);
@@ -59,7 +62,7 @@ const Home = () => {
       <div className="row">
         <Main products={products} onAdd={onAdd}></Main>
         <Basket
-          promoItems={promoItems}
+          promoItems={promo}
           cartItems={cartItems}
           onAdd={onAdd}
           onRemove={onRemove}

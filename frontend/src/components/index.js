@@ -9,6 +9,8 @@ import data from "../data";
 import ShippingAddress from "../Screens/ShippingAddress";
 import PaymentMethod from "../Screens/PaymentMethod";
 import PlaceOrder from "../Screens/PlaceOrder";
+import OrderHistory from "../Screens/OrderHistory";
+import Order from "../Screens/Order";
 
 const index = (props) => {
   const { product } = props;
@@ -23,6 +25,9 @@ const index = (props) => {
         <Route path="/shipping" element={<ShippingAddress />} />
         <Route path="/payment" element={<PaymentMethod />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route path="/order/:id" element={<Order />} />
+
+        <Route path="/orderhistory" element={<OrderHistory />} />
       </Routes>
     </Router>
   );

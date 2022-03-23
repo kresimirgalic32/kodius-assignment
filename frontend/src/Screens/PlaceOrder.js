@@ -41,13 +41,13 @@ const PlaceOrder = (props) => {
   const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
   const [cartItems, setCartItems] = useState(cartItemsLoad);
 
+  const promoItemsLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
+  const [promoItems, setPromoItems] = useState(promoItemsLoad);
+
   const { totalPrice } = props;
   const cart = useSelector((state) => state.cart);
 
   const navigate = useNavigate();
-  if (!cart.paymentMethod) {
-    navigate("/payment");
-  }
 
   return (
     <div>
@@ -79,7 +79,10 @@ const PlaceOrder = (props) => {
             <li>
               <div className="card card-body">
                 {/* <h2>Ordered Items</h2> */}
-                <BasketOrder cartItems={cartItems}></BasketOrder>
+                <BasketOrder
+                  cartItems={cartItems}
+                  promoItems={promoItems}
+                ></BasketOrder>
                 {/* <div className="block col-1">
                   <h2>Cart Items</h2>
                   <div>

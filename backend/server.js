@@ -23,7 +23,7 @@ app.use("/api/users", userRouter);
 app.use("/api/promo", promoRouter);
 
 app.use("/api/products", productRouter);
-app.get("/api/orders", orderRouter);
+app.use("/api/orders", orderRouter);
 app.use("/api/pom", placeOrderRouter);
 
 const __dirname = path.resolve();
