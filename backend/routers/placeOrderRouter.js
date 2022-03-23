@@ -38,7 +38,7 @@ placeOrderRouter.post(
     let mailDetails = {
       from: user,
       to: req.body.userData.email,
-      subject: "Test mail",
+      subject: "Receit",
       text:
         "Dear " +
         req.body.userData.name +
