@@ -55,6 +55,7 @@ placeOrderRouter.post(
     mailTransporter.sendMail(mailDetails, function (err) {
       if (err) {
         console.log("Error Occurs");
+        console.log(err);
       } else {
         console.log("Email sent successfully");
       }
