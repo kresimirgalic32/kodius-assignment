@@ -13,8 +13,8 @@ placeOrderRouter.post(
   expressAsyncHandler(async (req, res) => {
     let mailTransporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
-      secureConnection: false,
-      port: 587,
+      secureConnection: true,
+      port: 467,
       requiresAuth: true,
       domains: ["gmail.com", "googlemail.com"],
       auth: {
