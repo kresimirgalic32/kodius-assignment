@@ -15,7 +15,6 @@ const Header = (props) => {
       <div>
         <a href="/">
           <h1>Kodius</h1>
-          {/* <button onClick={signoutHandler}></button> */}
         </a>
       </div>
       <div>
@@ -34,7 +33,7 @@ const Header = (props) => {
             </Link>
             <ul className="dropdown-content">
               <li>
-                <Link to="orderhistory" className="test">
+                <Link to="/orderhistory" className="test">
                   Order History
                 </Link>
               </li>

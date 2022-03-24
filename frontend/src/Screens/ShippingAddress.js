@@ -6,8 +6,6 @@ import CheckoutSteps from "../components/CheckoutSteps";
 // import Header from "../components/Header";
 
 const ShippingAddress = () => {
-  // const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
-  // const [cartItems, setCartItems] = useState(cartItemsLoad);
   const navigate = useNavigate();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;

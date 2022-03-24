@@ -13,8 +13,6 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
-  // const cartItems = [];
-  // const [cartItems, setCartItems] = useState([{}]);
 
   if (!cartItems) {
     cartItems = [];

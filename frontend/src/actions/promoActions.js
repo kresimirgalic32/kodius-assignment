@@ -77,8 +77,3 @@ export const promoRemove = (name) => async (dispatch) => {
     });
   }
 };
-// export const promoSetup = (name, conjuction) => async (dispatch) => {
-//   dispatch({});
-// };
-
-// import promo from "./actions/promoActions"

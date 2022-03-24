@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { promo, promoRemove } from "../actions/promoActions";
-import { saveCartItems } from "../actions/cartActions";
-import axios from "axios";
 import { stringify } from "querystring";
 
 const Basket = (props) => {
@@ -14,9 +12,6 @@ const Basket = (props) => {
 
   var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const navigate = useNavigate();
-  const checkoutHandler = () => {
-    navigate("/signin?redirect=/shipping");
-  };
 
   const dispatch = useDispatch();
 
@@ -35,14 +30,12 @@ const Basket = (props) => {
       console.log(name);
 
       dispatch(promo(name));
-      
     }
-    
   };
-  
+
   const submitHandler = (e) => {
     e.preventDefault();
-    
+
     navigate("/shipping");
   };
 
@@ -50,10 +43,6 @@ const Basket = (props) => {
     return Math.floor(num);
   }
   var first = 0;
-  var second = 0;
-  var third = 0;
-
-  
 
   var motion = 0;
   var smoke = 0;
@@ -75,24 +64,19 @@ const Basket = (props) => {
       }
     }
   }
-  
 
   for (var j = 0; j < promoItems.length; j++) {
     totalPrice = eval(promoItems[j].formula);
-   
   }
 
   var discount = motion + smoke + first;
   totalPrice = totalPrice - discount;
 
- 
-
   function clickHandler(name) {
     dispatch(promoRemove(name));
     console.log("name " + name);
-    
   }
-  
+
   return (
     <div className="block col-1">
       <form className="form" onSubmit={promoHandler}>
@@ -124,11 +108,10 @@ const Basket = (props) => {
               </div>
             </div>
           ))}
-      
+
           <div className="flex">
             {promoItems.map((item) => (
               <div key={item.id}>
-                
                 <button
                   type="button"
                   className="promo"
@@ -136,10 +119,8 @@ const Basket = (props) => {
                 >
                   {item.name}
                 </button>
-               
               </div>
             ))}
-           
           </div>
 
           <input
@@ -148,11 +129,7 @@ const Basket = (props) => {
             id="promo-code"
             onChange={(f) => setName(f.target.value)}
           />
-          <button
-            type="submit"
-            className="primary"
-       
-          >
+          <button type="submit" className="primary">
             Promo Code
           </button>
 
@@ -160,8 +137,6 @@ const Basket = (props) => {
             <>
               <div className="row">
                 <div className="col-2">discount</div>
-
-              
 
                 <div className="col-1 text-right">{discount.toFixed(2)} €</div>
               </div>

@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../Screens/Home";
 import Register from "../Screens/Register";
 import Signin from "../Screens/Signin";
-// import Checkout from "../Screens/ShippingAddress";
 import Cart from "../Screens/Cart";
-import data from "../data";
 import ShippingAddress from "../Screens/ShippingAddress";
 import PaymentMethod from "../Screens/PaymentMethod";
 import PlaceOrder from "../Screens/PlaceOrder";
@@ -13,8 +11,6 @@ import OrderHistory from "../Screens/OrderHistory";
 import Order from "../Screens/Order";
 
 const index = (props) => {
-  const { product } = props;
-
   return (
     <Router>
       <Routes>

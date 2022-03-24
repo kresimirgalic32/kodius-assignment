@@ -1,16 +1,9 @@
 import React, { useState } from "react";
-import data from "../data";
+
 import Basket from "../components/Basket";
 import Header from "../components/Header";
 
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-// import cartItemsLoad from "./Home";
-import { saveCartItems } from "../actions/cartActions";
-
 const Cart = (props) => {
-  // const { products } = data;
-  // const { cartItemsLoad } = props;
   const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
   const [cartItems, setCartItems] = useState(cartItemsLoad);
   const promoItemsLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
@@ -42,8 +35,12 @@ const Cart = (props) => {
   return (
     <div className="App">
       <Header countCartItems={cartItems.length}></Header>
-      <Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} promoItems = {promoItems}></Basket>
-      {/* {console.log("cart items " + cartItems)} */}
+      <Basket
+        cartItems={cartItems}
+        onAdd={onAdd}
+        onRemove={onRemove}
+        promoItems={promoItems}
+      ></Basket>
     </div>
   );
 };
