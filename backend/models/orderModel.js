@@ -18,13 +18,7 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, reqired: true },
     },
     paymentMethod: { type: String, required: true },
-    // user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-
-    // discount: { type: Number, required: true },
-    // totalPrice: { type: Number, required: true },
-
-    // isPaid: { type: Boolean, default: false },
-    // paidAt: { type: Date },
+    user: { type: String, ref: "User", reqired: true },   
   },
   {
     timestamps: true,

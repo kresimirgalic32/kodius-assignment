@@ -12,12 +12,13 @@ const PaymentMethod = (props) => {
     navigate("/shipping");
   }
 
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+  const [paymentMethod, setPaymentMethod] = useState("Credit Card");
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(paymentMethod));
+    // dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
+    window.location.reload()
   };
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [cardNumber, setCardNumber] = useState("");

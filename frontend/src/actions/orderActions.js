@@ -43,14 +43,22 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 };
 export const detailsOrder = (orderId) => async (dispatch, getState) => {
+
+  console.log("order");
   dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
+  // console.log(order)
+
+  console.log(orderId)
+
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/orders/${orderId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const { data } = await Axios.get(`/api/orders/${orderId}`, 
+    // {
+      // headers: { Authorization: `Bearer ${userInfo.token}` },
+    // }
+    );
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =

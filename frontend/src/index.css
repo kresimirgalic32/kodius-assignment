@@ -198,3 +198,6 @@ input {
 .table button {
   margin: 0 0.2rem;
 }
+.full {
+  width: 100%;
+}

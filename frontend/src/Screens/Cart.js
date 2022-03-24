@@ -13,6 +13,8 @@ const Cart = (props) => {
   // const { cartItemsLoad } = props;
   const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
   const [cartItems, setCartItems] = useState(cartItemsLoad);
+  const promoItemsLoad = JSON.parse(localStorage.getItem("promo" || "[]"));
+  const [promoItems, setPromoItems] = useState(promoItemsLoad);
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -40,7 +42,7 @@ const Cart = (props) => {
   return (
     <div className="App">
       <Header countCartItems={cartItems.length}></Header>
-      <Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove}></Basket>
+      <Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} promoItems = {promoItems}></Basket>
       {/* {console.log("cart items " + cartItems)} */}
     </div>
   );

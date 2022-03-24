@@ -1,16 +1,23 @@
 import React, { useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { detailsOrder } from "../actions/orderActions";
 
 const Order = (props) => {
-  const orderId = props.match.params.id;
+  // const orderId = props.match.body._id;
+  const params = useParams();
+  const {id: orderId} = params;
+  
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order } = orderDetails;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsOrder(orderId));
-  }, [dispatch, orderId]);
+  }, [dispatch, orderId,]);
+  console.log(order)
+  console.log(orderId)
+
   return (
     <div>
       <h1>Order {order._id}</h1>
