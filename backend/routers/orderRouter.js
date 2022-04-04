@@ -9,7 +9,7 @@ orderRouter.get(
   "/mine",
   // isAuth,
   expressAsyncHandler(async (req, res) => {
-    const orders = await Order.find({ user: req.body._id });
+    const orders = await Order.find();
     res.send(orders);
   })
 );
@@ -24,8 +24,9 @@ orderRouter.post(
         orderItems: req.body.orderItems,
         shippingAddress: req.body.shippingAddress,
         paymentMethod: req.body.paymentMethod,
-        user: req.body._id,
+        user: req.body.userId,
       });
+
       const createdOrder = await order.save();
       res
         .status(201)

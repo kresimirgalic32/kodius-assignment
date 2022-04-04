@@ -12,25 +12,20 @@ import {
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
-  console.log("order");
-
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
-  console.log("order");
-
-  console.log(order);
 
   try {
     const {
       userSignin: { userInfo },
     } = getState();
-    console.log(userInfo);
 
     const { data } = await Axios.post("/api/orders", order, {
       // headers: {
       //   Authorization: `Bearer ${userInfo.token}`,
       // },
     });
-    console.log("data");
+    // const { data2 } = await Axios.post("/api/orders/mine", order, {});
+
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
   } catch (error) {
     dispatch({
@@ -43,21 +38,17 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 };
 export const detailsOrder = (orderId) => async (dispatch, getState) => {
-
-  console.log("order");
   dispatch({ type: ORDER_DETAILS_REQUEST, payload: orderId });
-  // console.log(order)
-
-  console.log(orderId)
 
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/orders/${orderId}`, 
-    // {
+    const { data } = await Axios.get(
+      `/api/orders/${orderId}`
+      // {
       // headers: { Authorization: `Bearer ${userInfo.token}` },
-    // }
+      // }
     );
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
@@ -69,16 +60,16 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
   }
 };
 
-export const listOrderMine = () => async (dispatch, getState) => {
+export const listOrderMine = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_MINE_LIST_REQUEST });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
     const { data } = await Axios.get("/api/orders/mine", {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${userInfo.token}`,
+      // },
     });
     dispatch({ type: ORDER_MINE_LIST_SUCCESS, payload: data });
   } catch (error) {

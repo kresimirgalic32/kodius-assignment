@@ -56,7 +56,7 @@ const data = {
       name: "Smoke Sensor",
       price: 19.99,
       image:
-        "https://www.legrand.com/ecatalogue/media/catalog/product/cache/4/image/650x650/9df78eab33525d08d6e5fb8d27136e95/l/g/LG-643072-WEB-F.jpg",
+        "https://www.powerplanetonline.com/cdnassets/xiaomi_aqara_water_leak_sensor_01_l.jpg",
     },
     {
       id: "5",

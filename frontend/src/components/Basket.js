@@ -22,13 +22,10 @@ const Basket = (props) => {
     testing = JSON.parse(localStorage.getItem("promo"));
     testing = JSON.stringify(testing);
 
-    console.log("testing " + testing);
     var substring = name;
     stringify(substring);
 
     if (!(testing.indexOf(substring) !== -1)) {
-      console.log(name);
-
       dispatch(promo(name));
     }
   };
@@ -74,7 +71,6 @@ const Basket = (props) => {
 
   function clickHandler(name) {
     dispatch(promoRemove(name));
-    console.log("name " + name);
   }
 
   return (

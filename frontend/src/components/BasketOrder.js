@@ -7,9 +7,7 @@ import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 const BasketOrder = (props) => {
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
-  console.log("cart");
 
-  console.log(cart);
   const { success, order } = orderCreate;
   const { cartItems } = props;
   var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
@@ -57,9 +55,8 @@ const BasketOrder = (props) => {
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(cartItems);
 
-    dispatch(createOrder({ ...cart, orderItems: cartItems }));
+    dispatch(createOrder({ ...cart, orderItems: cartItems, userId: userId }));
 
     fetch("/api/pom/placeorder", {
       method: "POST",
@@ -89,17 +86,14 @@ const BasketOrder = (props) => {
   function round(num) {
     return Math.floor(num);
   }
-  let userId = JSON.parse(localStorage.getItem("userInfo")).id;
-  console.log("userID");
-
-  console.log(userId);
+  var userId = JSON.parse(localStorage.getItem("userInfo"))._id;
 
   return (
     <div>
       {" "}
       <div className="spacer">
         <form className="form" onSubmit={submitHandler}>
-          <input type="text" hidden="true" name="_id" value={userId}></input>
+          <input type="text" hidden={true} name="_id" value={userId}></input>
           <h2>Cart Items</h2>
           <div>
             {cartItems.length === 0 && <div>Cart is empty</div>}
