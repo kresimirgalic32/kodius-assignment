@@ -68,7 +68,9 @@ const Basket = (props) => {
 
   var discount = motion + smoke + first;
   totalPrice = totalPrice - discount;
-
+  let promoDiscount =
+    cartItems.reduce((a, c) => a + c.qty * c.price, 0) -
+    (totalPrice + discount);
   function clickHandler(name) {
     dispatch(promoRemove(name));
   }
@@ -132,9 +134,15 @@ const Basket = (props) => {
           {cartItems.length !== 0 && (
             <>
               <div className="row">
-                <div className="col-2">discount</div>
+                <div className="col-2">Quantity Discount</div>
 
                 <div className="col-1 text-right">{discount.toFixed(2)} €</div>
+              </div>
+              <div className="row">
+                <div className="col-2">Promo Discount</div>
+                <div className="col-1 text-right">
+                  {promoDiscount.toFixed(2)} €
+                </div>
               </div>
 
               <div className="row">

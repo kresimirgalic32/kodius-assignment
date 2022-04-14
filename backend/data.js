@@ -63,7 +63,7 @@ const data = {
       name: "Water Leak Sensor",
       price: 14.99,
       image:
-        "https://cdn.antratek.nl/media/product/72c/lwl02-lorawan-water-leak-sensor-lwl02-eu868-a6c.jpg",
+        "https://wooxhome.com/images/woox-r7050-smart-water-leak-sensor-p51-416_image.jpg",
     },
   ],
 };

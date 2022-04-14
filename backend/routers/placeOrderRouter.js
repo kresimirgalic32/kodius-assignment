@@ -1,10 +1,8 @@
 import express from "express";
-
 import expressAsyncHandler from "express-async-handler";
 import nodemailer from "nodemailer";
 
 const placeOrderRouter = express.Router();
-
 const user = "passdirect11@gmail.com";
 const pass = "passdirect123456789";
 

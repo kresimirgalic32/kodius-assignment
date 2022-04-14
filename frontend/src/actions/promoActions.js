@@ -4,6 +4,9 @@ import {
   PROMO_REQUEST,
   PROMO_SUCCESS,
   PROMO_FAIL,
+  NEW_PROMO_REQUEST,
+  NEW_PROMO_SUCCESS,
+  NEW_PROMO_FAIL,
 } from "../constants/promoConstants";
 
 export const promo = (name) => async (dispatch) => {
@@ -70,6 +73,26 @@ export const promoRemove = (name) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PROMO_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const newPromo = (name, conjuction, formula) => async (dispatch) => {
+  dispatch({ type: NEW_PROMO_REQUEST, payload: { name, conjuction, formula } });
+  try {
+    const { data } = await Axios.post("/api/promo/promosetup", {
+      name,
+      conjuction,
+      formula,
+    });
+    dispatch({ type: NEW_PROMO_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: NEW_PROMO_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

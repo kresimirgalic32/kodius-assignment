@@ -40,7 +40,7 @@ promoRouter.post(
     });
     const createdPromo = await promo.save();
     res.send({
-      id: createdPromo._id,
+      _id: createdPromo._id,
       name: createdPromo.name,
       conjuction: createdPromo.conjuction,
       formula: createdPromo.formula,

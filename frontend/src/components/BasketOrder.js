@@ -56,7 +56,14 @@ const BasketOrder = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    dispatch(createOrder({ ...cart, orderItems: cartItems, userId: userId }));
+    dispatch(
+      createOrder({
+        ...cart,
+        orderItems: cartItems,
+        userId: userId,
+        totalPrice: totalPrice,
+      })
+    );
 
     fetch("/api/pom/placeorder", {
       method: "POST",
@@ -87,7 +94,9 @@ const BasketOrder = (props) => {
     return Math.floor(num);
   }
   var userId = JSON.parse(localStorage.getItem("userInfo"))._id;
-
+  let promoDiscount =
+    cartItems.reduce((a, c) => a + c.qty * c.price, 0) -
+    (totalPrice + discount);
   return (
     <div>
       {" "}
@@ -111,10 +120,16 @@ const BasketOrder = (props) => {
             {cartItems.length !== 0 && (
               <>
                 <div className="row">
-                  <div className="col-2">discount</div>
+                  <div className="col-2">Quantity Discount</div>
 
                   <div className="col-1 text-right">
                     {discount.toFixed(2)} €
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-2">Promo Discount</div>
+                  <div className="col-1 text-right">
+                    {promoDiscount.toFixed(2)} €
                   </div>
                 </div>
 

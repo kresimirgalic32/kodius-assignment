@@ -1,3 +1,6 @@
 export const PROMO_REQUEST = "PROMO_REQUEST";
 export const PROMO_SUCCESS = "PROMO_SUCCESS";
 export const PROMO_FAIL = "PROMO_FAIL";
+export const NEW_PROMO_REQUEST = "NEW_PROMO_REQUEST";
+export const NEW_PROMO_SUCCESS = "NEW_PROMO_SUCCESS";
+export const NEW_PROMO_FAIL = "NEW_PROMO_FAIL";

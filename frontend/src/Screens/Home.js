@@ -4,8 +4,11 @@ import Basket from "../components/Basket";
 import data from "../data";
 import { useEffect, useState } from "react";
 import { saveCartItems } from "../actions/cartActions";
+import { useSelector } from "react-redux";
+import Search from "../components/Search";
 
 const Home = () => {
+  const productList = useSelector((state) => state.productList);
   const { products } = data;
   const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
 
@@ -53,12 +56,36 @@ const Home = () => {
       );
     }
   };
+  // let searchName;
+  let [search, setSearch] = useState("");
+  // var [searchName, setSearchName] = useState("");
+  // const searchHandler = (e) => {
+  //   e.preventDefault();
+  //   setSearchName = search;
+  //   console.log("searchName");
+  //   console.log(search);
+
+  //   console.log(searchName);
+  // };
+  // console.log(searchName);
+  console.log(search);
 
   return (
     <div className="App">
       <Header countCartItems={cartItems.length}></Header>
+      <div>
+        <input
+          type="text"
+          id="search"
+          placeholder="Search"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        {/* <button type="button" onClick={searchHandler} className="primary">
+          Search
+        </button> */}
+      </div>
       <div className="row">
-        <Main products={products} onAdd={onAdd}></Main>
+        <Main searchName={search} products={products} onAdd={onAdd}></Main>
         <Basket
           promoItems={promo}
           cartItems={cartItems}

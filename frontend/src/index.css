@@ -24,8 +24,10 @@ li {
   list-style-type: none;
 }
 .row {
+  
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .row.center {
   align-items: center;
@@ -197,4 +199,40 @@ input {
 }
 .table button {
   margin: 0 0.2rem;
+}
+
+
+.product{
+  min-width: 150px;
+  padding-top: 15px;
+}
+th{
+  display: block;
+  /* float: left; */
+}
+
+.orderHistory{
+  display: inline;
+}
+
+.item{
+  display: block;
+}
+.order{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.long{
+  /* width: calc(100% - 365.8px); */
+  width: 25%;
+  /* overflow: hidden; */
+}
+tr{
+  width:25%
+}
+td{
+  width: 92.1%;
 }
