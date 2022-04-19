@@ -12,7 +12,8 @@ import Order from "../Screens/Order";
 import Promo from "../Screens/Promo";
 import ProductScreen from "../Screens/Product";
 import NewProduct from "../Screens/NewProduct";
-
+import AdminPanel from "../Screens/AdminPanel";
+import ProtectedRouters from "./ProtectedRouters";
 const index = (props) => {
   return (
     <Router>
@@ -25,8 +26,11 @@ const index = (props) => {
         <Route path="/payment" element={<PaymentMethod />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
         <Route path="/product/:id" element={<ProductScreen />} />
-        <Route path="/promo" element={<Promo />} />
-        <Route path="/newproduct" element={<NewProduct />} />
+        <Route element={<ProtectedRouters />}>
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/promo" element={<Promo />} />
+          <Route path="/newproduct" element={<NewProduct />} />
+        </Route>
 
         <Route path="/orderhistory" element={<OrderHistory />} />
       </Routes>

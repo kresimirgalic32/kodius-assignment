@@ -44,6 +44,10 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
+    console.log("orderId");
+
+    console.log(orderId);
+
     const { data } = await Axios.get(
       `/api/orders/${orderId}`
       // {

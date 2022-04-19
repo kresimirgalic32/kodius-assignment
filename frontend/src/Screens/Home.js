@@ -28,16 +28,24 @@ const Home = () => {
   if (!promo) {
     promo = [];
   }
+  // const userInfoLoad = JSON.parse(localStorage.getItem("userInfo" || "[]"));
+  // var [userInfo, setUserInfo] = useState(userInfoLoad);
+  // useEffect(() => {
+  //   localStorage.setItem("userInfo", JSON.stringify(userInfo));
+  // }, [userInfo]);
+  // if (!userInfo) {
+  //   userInfo = [];
+  // }
   const onAdd = (product) => {
     saveCartItems(product);
     const varijabla = JSON.parse(localStorage.getItem("cartItems"));
     console.log(varijabla);
 
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
+          x._id === product._id ? { ...exist, qty: exist.qty + 1 } : x
         )
       );
     } else {
@@ -45,13 +53,13 @@ const Home = () => {
     }
   };
   const onRemove = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
+      setCartItems(cartItems.filter((x) => x._id !== product._id));
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
         )
       );
     }

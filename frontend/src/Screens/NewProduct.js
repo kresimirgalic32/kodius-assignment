@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { newProduct } from "../actions/productActions";
 import Header from "../components/Header";
@@ -8,15 +7,23 @@ const NewProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const dispatch = useDispatch;
 
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
+
     dispatch(newProduct(name, price, image));
   };
+
   return (
     <div>
-      <Header></Header>
+      <header className="block row center color">
+        <div>
+          <a href="/">
+            <h1>Kodius</h1>
+          </a>
+        </div>
+      </header>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Add a Product</h1>
@@ -55,13 +62,13 @@ const NewProduct = () => {
         {/* <div>
           <label htmlFor="stock">Stock</label>
           <input
-            type="number"
-            id="stock"
-            placeholder="Stock"
-            required
-            onChange={(e) => setImage(e.target.value)}
+          type="number"
+          id="stock"
+          placeholder="Stock"
+          required
+          onChange={(e) => setImage(e.target.value)}
           />
-        </div> */}
+          </div> */}
         <button className="primary" type="submit">
           ADD
         </button>

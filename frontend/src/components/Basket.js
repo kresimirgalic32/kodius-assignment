@@ -65,12 +65,10 @@ const Basket = (props) => {
   for (var j = 0; j < promoItems.length; j++) {
     totalPrice = eval(promoItems[j].formula);
   }
-
+  let tp = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   var discount = motion + smoke + first;
   totalPrice = totalPrice - discount;
-  let promoDiscount =
-    cartItems.reduce((a, c) => a + c.qty * c.price, 0) -
-    (totalPrice + discount);
+  let promoDiscount = tp - (totalPrice + discount);
   function clickHandler(name) {
     dispatch(promoRemove(name));
   }
@@ -102,7 +100,7 @@ const Basket = (props) => {
               </div>
 
               <div className="col-2 text-right">
-                {item.qty} x {item.price.toFixed(2)} €
+                {item.qty} x {Number(item.price).toFixed(2)} €
               </div>
             </div>
           ))}

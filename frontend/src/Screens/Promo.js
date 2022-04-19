@@ -10,7 +10,7 @@ const Promo = (props) => {
   const [formula, setFormula] = useState("");
   const [cartItems, setCartItems] = useState([]);
 
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(newPromo(name, conjuction, formula));
@@ -18,8 +18,13 @@ const Promo = (props) => {
 
   return (
     <div>
-      <Header countCartItems={cartItems.length}></Header>
-
+      <header className="block row center color">
+        <div>
+          <a href="/">
+            <h1>Kodius</h1>
+          </a>
+        </div>
+      </header>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Add a Promo Code</h1>

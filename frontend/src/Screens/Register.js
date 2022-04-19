@@ -18,6 +18,12 @@ const Register = (props) => {
   const redirect = redirectInUrl ? redirectInUrl : "/";
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo } = userRegister;
+  console.log("userRegister");
+  console.log(userRegister);
+
+  console.log("userInfo");
+
+  console.log(userInfo);
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {

@@ -60,8 +60,8 @@ const BasketOrder = (props) => {
       createOrder({
         ...cart,
         orderItems: cartItems,
-        userId: userId,
         totalPrice: totalPrice,
+        userId: userId,
       })
     );
 
@@ -112,7 +112,7 @@ const BasketOrder = (props) => {
                 <div className="col-2"></div>
 
                 <div className="col-2 text-right">
-                  {item.qty} x {item.price.toFixed(2)}€
+                  {item.qty} x {Number(item.price).toFixed(2)}€
                 </div>
               </div>
             ))}

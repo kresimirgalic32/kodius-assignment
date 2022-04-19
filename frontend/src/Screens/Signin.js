@@ -20,6 +20,9 @@ const Signin = (props) => {
     e.preventDefault();
     dispatch(signin(email, password));
   };
+  console.log("userInfo.name");
+
+  // console.log(userInfo.name);
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);

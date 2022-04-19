@@ -6,9 +6,9 @@ import Product from "../models/productModel.js";
 const productRouter = express.Router();
 
 productRouter.get(
-  "/",
+  "/mine",
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find();
     res.send(products);
   })
 );
@@ -30,6 +30,23 @@ productRouter.get(
     } else {
       res.status(404).send({ message: "Product Not Found" });
     }
+  })
+);
+productRouter.post(
+  "/new",
+  expressAsyncHandler(async (req, res) => {
+    const product = new Product({
+      name: req.body.name,
+      price: req.body.price,
+      image: req.body.image,
+    });
+    const createdProduct = await product.save();
+    res.send({
+      _id: createdProduct._id,
+      name: createdProduct.name,
+      price: createdProduct.price,
+      image: createdProduct.image,
+    });
   })
 );
 

@@ -6,8 +6,13 @@ import { listOrderMine } from "../actions/orderActions.js";
 
 const OrderHistory = (props) => {
   const orderMineList = useSelector((state) => state.orderMineList);
+  console.log("orderMineList");
+  console.log(orderMineList);
 
   const { orders } = orderMineList;
+  console.log("orders");
+  console.log(orders);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

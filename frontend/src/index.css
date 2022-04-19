@@ -168,10 +168,12 @@ input {
 }
 .flex {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-around;
   /* align-items: flex-start; */
-  float: right;
+  float: left;
   text-align: center;
+  padding-right: 50px;
+  flex-direction: row-reverse;
 }
 @media (max-width: 768px) {
   .flex {
@@ -200,21 +202,16 @@ input {
 .table button {
   margin: 0 0.2rem;
 }
-
-
 .product{
   min-width: 150px;
   padding-top: 15px;
 }
 th{
   display: block;
-  /* float: left; */
 }
-
 .orderHistory{
   display: inline;
 }
-
 .item{
   display: block;
 }
@@ -224,15 +221,24 @@ th{
   display: flex;
   justify-content: space-around;
 }
-
 .long{
-  /* width: calc(100% - 365.8px); */
-  width: 25%;
-  /* overflow: hidden; */
+  
+  width: 25%;  
 }
 tr{
   width:25%
 }
 td{
   width: 92.1%;
+}
+.none{
+  display: none;
+}
+.float{
+  float: right;
+    word-wrap: break-word;
+}
+.left{
+  float:left;
+    word-wrap: break-word;
 }

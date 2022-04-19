@@ -1,25 +1,71 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { detailsProduct } from "../actions/productActions";
 import Header from "../components/Header";
-import Product from "../components/Product";
+// import Product from "../components/Product";
 
 const ProductScreen = (props) => {
+  const navigate = useNavigate();
+
   const [cartItems, setCartItems] = useState([]);
-  const { products, onAdd } = props;
+  const productDetails = useSelector((state) => state.productDetails);
+  console.log("productDetails");
+  console.log(productDetails);
+
+  const { product } = productDetails;
   const params = useParams();
   const { id: productId } = params;
+  console.log("id");
 
+  console.log(productId);
+  console.log(product);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(detailsProduct(productId));
+  }, [dispatch, productId]);
+  const back = () => {
+    navigate("/");
+  };
   return (
     <div>
       <Header countCartItems={cartItems.length}></Header>
-      {products.map((product) => (
-        <div key={product.id}>
-          {product.id === productId ? (
-            <Product product={product} onAdd={onAdd}></Product>
-          ) : null}
+      <div className="product ">
+        <div className="row top">
+          <div className="col-2">
+            <img
+              className="large"
+              src={productDetails.image}
+              alt={productDetails.name}
+            ></img>
+          </div>
+          <div className="col-1">
+            <ul>
+              <li>
+                <h1>{productDetails.name}</h1>
+              </li>
+
+              <li>Price : ${productDetails.price}</li>
+              <li>
+                Description:
+                {/* To be uncomented after adding the description */}
+                {/* <p>{productDetails.description}</p> */}
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Reiciendis porro nobis, libero, sed vitae maiores aut ratione,
+                  asperiores distinctio laboriosam debitis dolorum ea ut dolorem
+                  eaque sapiente. Recusandae, consectetur quis.
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
-      ))}
+        <div>
+          <button onClick={() => back()}>Go Back</button>
+        </div>
+      </div>
     </div>
   );
 };
