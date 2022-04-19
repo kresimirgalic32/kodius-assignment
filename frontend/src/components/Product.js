@@ -5,16 +5,7 @@ import { Link } from "react-router-dom";
 import { listProducts } from "../actions/productActions";
 
 const Product = (props) => {
-  const { searchName, onAdd } = props;
-  const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productList);
-
-  let { product } = { products: {} };
-  product = productList.products;
-
-  useEffect(() => {
-    dispatch(listProducts({}));
-  }, [dispatch]);
+  const { searchName, onAdd, product } = props;
 
   return (
     <div>

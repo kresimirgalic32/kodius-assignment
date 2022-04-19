@@ -3,8 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../actions/orderActions";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { listProducts } from "../actions/productActions";
 
 const BasketOrder = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const productList = useSelector((state) => state.productList);
+
+  let { product } = { products: {} };
+  product = productList.products;
+
+  useEffect(() => {
+    dispatch(listProducts({}));
+  }, [dispatch]);
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
 
@@ -12,33 +23,33 @@ const BasketOrder = (props) => {
   const { cartItems } = props;
   var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
 
-  var motion = 0;
-  var smoke = 0;
+  let discount = 0;
+  let num = 0;
+  if (product !== undefined) {
+    for (let k = 0; k < product.length; k++) {
+      for (let i = 0; i < cartItems.length; i++) {
+        if (
+          product[k].discount !== undefined &&
+          product[k].quantity !== undefined &&
+          product[k].name === cartItems[i].name &&
+          cartItems[i].qty > product[k].quantity - 1
+        ) {
+          num = round(cartItems[i].qty / product[k].quantity);
 
-  for (var i = 0; i < cartItems.length; i++) {
-    if (cartItems[i].name === "Motion Sensor") {
-      if (cartItems[i].qty > 2) {
-        motion = round(cartItems[i].qty / 3);
-        motion = motion * 9.97;
-      } else {
-        motion = null;
-      }
-    } else if (cartItems[i].name === "Smoke Sensor") {
-      if (cartItems[i].qty > 1) {
-        smoke = round(cartItems[i].qty / 2);
-        smoke = smoke * 4.98;
-      } else {
-        smoke = null;
+          discount =
+            discount +
+            num *
+              (product[k].quantity * product[k].price - product[k].discount);
+        }
       }
     }
   }
 
   var promoLocal = JSON.parse(localStorage.getItem("promo"));
-  for (var j = 0; j < promoLocal.length; ) {
+  for (var j = 0; j < promoLocal.length; j++) {
     totalPrice = eval(promoLocal[j].formula);
-    j = j + 1;
   }
-  var discount = motion + smoke;
+
   totalPrice = totalPrice - discount;
 
   const [data, setData] = useState({
@@ -51,8 +62,7 @@ const BasketOrder = (props) => {
     totalPriceData: totalPrice,
     discountData: discount,
   });
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
 

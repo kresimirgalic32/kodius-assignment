@@ -1,19 +1,34 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
-import { useDispatch } from "react-redux";
-import { newPromo } from "../actions/promoActions";
-import Header from "../components/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { deletePromo, listPromo, newPromo } from "../actions/promoActions";
 
 const Promo = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const promoList = useSelector((state) => state.listPromo);
+  let { promo } = { promo: {} };
+  promo = promoList.promo;
+  useEffect(() => {
+    dispatch(listPromo({}));
+  }, [dispatch]);
+
   const [name, setName] = useState("");
   const [conjuction, setConjuction] = useState("");
   const [formula, setFormula] = useState("");
   const [cartItems, setCartItems] = useState([]);
 
-  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(newPromo(name, conjuction, formula));
+    window.location.reload();
+  };
+  const clickHandler = (id) => {
+    dispatch(deletePromo(id));
+    window.location.reload();
   };
 
   return (
@@ -41,22 +56,29 @@ const Promo = (props) => {
         </div>
         <div>
           <label htmlFor="conjuction">Conjuction</label>
-          <input
-            type="radio"
-            id="conjuction"
-            name="conjuction"
-            value="true"
-            onChange={(e) => setConjuction(e.target.value)}
-          />
-          <input
-            type="radio"
-            id="name"
-            name="conjuction"
-            value="false"
-            onChange={(e) => setConjuction(e.target.value)}
-          />
-        </div>
+          <label htmlFor="conjuction" className="radio-inline">
+            <input
+              type="radio"
+              id="conjuction"
+              className="conjuction"
+              name="conjuction"
+              value="true"
+              onChange={(e) => setConjuction(e.target.value)}
+            />
+            True
+          </label>
 
+          <label htmlFor="conjuction" className="radio-inline">
+            <input
+              type="radio"
+              className="conjuction"
+              name="conjuction"
+              value="false"
+              onChange={(e) => setConjuction(e.target.value)}
+            />
+            False
+          </label>
+        </div>
         <div>
           <label htmlFor="formula">Formula</label>
           <input
@@ -64,12 +86,37 @@ const Promo = (props) => {
             id="formula"
             placeholder="Enter the formula"
             required
-            onChange={(e) => setFormula(e.target.value)}
+            onChange={(e) => setFormula("totalPrice-(" + e.target.value + ")")}
           />
         </div>
         <button className="primary" type="submit">
           ADD
         </button>
+        <div>
+          <label htmlFor="formula">
+            <h3>Formula Example:</h3>
+          </label>
+          <p>20%OFF</p>
+
+          <p>formula = totalPrice/5</p>
+          <p>totalPrice = totalPrice - (formula)</p>
+        </div>
+        <div>
+          <h2>Remove Promo Codes</h2>
+        </div>
+        {promo !== undefined
+          ? promo.map((promo) => (
+              <div key={promo._id}>
+                <button
+                  type="button"
+                  className="promo"
+                  onClick={() => clickHandler(promo._id)}
+                >
+                  {promo.name}
+                </button>
+              </div>
+            ))
+          : null}
       </form>
     </div>
   );

@@ -59,11 +59,7 @@ userRouter.post(
 userRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
-    console.log(req.params);
     const user = await User.findById(req.params.id);
-    console.log("userget");
-    console.log(user);
-
     if (user) {
       res.send(user);
     } else {

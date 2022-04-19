@@ -6,26 +6,18 @@ import Header from "../components/Header";
 
 const Register = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [cartItems, setCartItems] = useState([]);
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/";
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo } = userRegister;
-  console.log("userRegister");
-  console.log(userRegister);
 
-  console.log("userInfo");
-
-  console.log(userInfo);
-
-  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {

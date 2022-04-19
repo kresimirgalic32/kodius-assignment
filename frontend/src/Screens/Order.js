@@ -14,8 +14,6 @@ const Order = (props) => {
   useEffect(() => {
     dispatch(detailsOrder(orderId));
   }, [dispatch, orderId]);
-  console.log(order);
-  console.log(orderId);
 
   return (
     <div>

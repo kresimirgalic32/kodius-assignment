@@ -242,3 +242,31 @@ td{
   float:left;
     word-wrap: break-word;
 }
+.search{
+  display: block;
+  margin: auto;
+  /* margin-left: 5px; */
+  border-width: 2px;
+  border-radius: 8px;
+  border-color: red;
+  width: 10%;
+  min-width: 200px;
+  
+}
+.radio{
+  display: inline;
+  margin: auto;
+  max-width: 200px;
+  
+}
+.conjuction{
+  display: inline;
+  float: left;
+}
+.radio-inline {
+  position: relative;
+  display: inline-block;
+  padding-left: 20px;
+  font-weight: 400;
+  line-height: 37px;
+}

@@ -39,6 +39,9 @@ productRouter.post(
       name: req.body.name,
       price: req.body.price,
       image: req.body.image,
+      description: req.body.description,
+      quantity: req.body.quantity,
+      discount: req.body.discount,
     });
     const createdProduct = await product.save();
     res.send({
@@ -46,7 +49,22 @@ productRouter.post(
       name: createdProduct.name,
       price: createdProduct.price,
       image: createdProduct.image,
+      description: createdProduct.description,
+      quantity: createdProduct.quantity,
+      discount: createdProduct.discount,
     });
+  })
+);
+productRouter.delete(
+  "/:id",
+  expressAsyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      const deleteProduct = await product.remove();
+      res.send({ message: "Order Deleted", order: deleteProduct });
+    } else {
+      res.status(404).send({ message: "Order Not Found" });
+    }
   })
 );
 

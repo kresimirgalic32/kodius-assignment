@@ -4,12 +4,12 @@ import Basket from "../components/Basket";
 import data from "../data";
 import { useEffect, useState } from "react";
 import { saveCartItems } from "../actions/cartActions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Search from "../components/Search";
+import { listProducts } from "../actions/productActions";
+import Description from "../components/Description";
 
 const Home = () => {
-  const productList = useSelector((state) => state.productList);
-  const { products } = data;
   const cartItemsLoad = JSON.parse(localStorage.getItem("cartItems" || "[]"));
 
   var [cartItems, setCartItems] = useState(cartItemsLoad);
@@ -28,18 +28,10 @@ const Home = () => {
   if (!promo) {
     promo = [];
   }
-  // const userInfoLoad = JSON.parse(localStorage.getItem("userInfo" || "[]"));
-  // var [userInfo, setUserInfo] = useState(userInfoLoad);
-  // useEffect(() => {
-  //   localStorage.setItem("userInfo", JSON.stringify(userInfo));
-  // }, [userInfo]);
-  // if (!userInfo) {
-  //   userInfo = [];
-  // }
+
   const onAdd = (product) => {
     saveCartItems(product);
     const varijabla = JSON.parse(localStorage.getItem("cartItems"));
-    console.log(varijabla);
 
     const exist = cartItems.find((x) => x._id === product._id);
     if (exist) {
@@ -64,36 +56,23 @@ const Home = () => {
       );
     }
   };
-  // let searchName;
-  let [search, setSearch] = useState("");
-  // var [searchName, setSearchName] = useState("");
-  // const searchHandler = (e) => {
-  //   e.preventDefault();
-  //   setSearchName = search;
-  //   console.log("searchName");
-  //   console.log(search);
 
-  //   console.log(searchName);
-  // };
-  // console.log(searchName);
-  console.log(search);
+  let [search, setSearch] = useState("");
 
   return (
     <div className="App">
       <Header countCartItems={cartItems.length}></Header>
-      <div>
+      <div className="box">
         <input
+          className="search"
           type="text"
           id="search"
-          placeholder="Search"
+          placeholder=" Search"
           onChange={(e) => setSearch(e.target.value)}
         />
-        {/* <button type="button" onClick={searchHandler} className="primary">
-          Search
-        </button> */}
       </div>
       <div className="row">
-        <Main searchName={search} products={products} onAdd={onAdd}></Main>
+        <Main searchName={search} onAdd={onAdd}></Main>
         <Basket
           promoItems={promo}
           cartItems={cartItems}
@@ -101,22 +80,7 @@ const Home = () => {
           onRemove={onRemove}
         ></Basket>
       </div>
-      <div className="block">
-        <h1>DISCLAIMER: </h1>
-        <h2>
-          This is not a webpage for selling, it's only used as a test, do not
-          enter your real credit card details.
-        </h2>
-      </div>
-      <div className="block">
-        <h1>Discounts:</h1>
-        <h2>3 Motion Sensors for 65 EUR</h2>
-        <h2>2 Smoke Sensors for 35 EUR</h2>
-        <h1>Promotion Codes:</h1>
-        <h2>20%OFF</h2>
-        <h2>5%OFF</h2>
-        <h2>20EUROFF - Applicable in conjuction with other promotion codes</h2>
-      </div>
+      <Description></Description>
     </div>
   );
 };

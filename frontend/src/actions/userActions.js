@@ -64,15 +64,9 @@ export const signout = () => (dispatch) => {
 export const userGet = (userId) => async (dispatch) => {
   dispatch({ type: USER_GET_REQUEST, payload: userId });
   try {
-    console.log(userId);
     userId = JSON.stringify(userId.userId);
     userId = userId.slice(1, -1);
-    console.log(userId);
-
     const { data } = await Axios.get(`/api/users/${userId}`);
-    console.log("data");
-    console.log(data);
-
     dispatch({ type: USER_GET_SUCCESS, payload: data });
   } catch (error) {
     const message =

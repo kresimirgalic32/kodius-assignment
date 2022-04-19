@@ -8,21 +8,14 @@ import Header from "../components/Header";
 // import Product from "../components/Product";
 
 const ProductScreen = (props) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [cartItems, setCartItems] = useState([]);
   const productDetails = useSelector((state) => state.productDetails);
-  console.log("productDetails");
-  console.log(productDetails);
-
   const { product } = productDetails;
   const params = useParams();
   const { id: productId } = params;
-  console.log("id");
-
-  console.log(productId);
-  console.log(product);
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
@@ -47,17 +40,10 @@ const ProductScreen = (props) => {
                 <h1>{productDetails.name}</h1>
               </li>
 
-              <li>Price : ${productDetails.price}</li>
+              <li>Price : {productDetails.price} €</li>
               <li>
                 Description:
-                {/* To be uncomented after adding the description */}
-                {/* <p>{productDetails.description}</p> */}
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Reiciendis porro nobis, libero, sed vitae maiores aut ratione,
-                  asperiores distinctio laboriosam debitis dolorum ea ut dolorem
-                  eaque sapiente. Recusandae, consectetur quis.
-                </p>
+                <p>{productDetails.description}</p>
               </li>
             </ul>
           </div>

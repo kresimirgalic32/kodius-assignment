@@ -5,15 +5,9 @@ import Header from "../components/Header";
 import { listOrderMine } from "../actions/orderActions.js";
 
 const OrderHistory = (props) => {
-  const orderMineList = useSelector((state) => state.orderMineList);
-  console.log("orderMineList");
-  console.log(orderMineList);
-
-  const { orders } = orderMineList;
-  console.log("orders");
-  console.log(orders);
-
   const dispatch = useDispatch();
+  const orderMineList = useSelector((state) => state.orderMineList);
+  const { orders } = orderMineList;
 
   useEffect(() => {
     dispatch(listOrderMine({ userId: userId }));

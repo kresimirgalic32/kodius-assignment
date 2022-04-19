@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { promo, promoRemove } from "../actions/promoActions";
 import { stringify } from "querystring";
+import { listProducts } from "../actions/productActions";
+import { useEffect } from "react";
 
 const Basket = (props) => {
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+
+  let { product } = { products: {} };
+  product = productList.products;
+
+  useEffect(() => {
+    dispatch(listProducts({}));
+  }, [dispatch]);
+
   const { promoItems, cartItems, onAdd, onRemove } = props;
 
   const { data } = props;
@@ -12,8 +24,6 @@ const Basket = (props) => {
 
   var totalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
 
   const promoHandler = (f) => {
     f.preventDefault();
@@ -39,25 +49,45 @@ const Basket = (props) => {
   function round(num) {
     return Math.floor(num);
   }
-  var first = 0;
 
   var motion = 0;
   var smoke = 0;
 
-  for (var i = 0; i < cartItems.length; i++) {
-    if (cartItems[i].name === "Motion Sensor") {
-      if (cartItems[i].qty > 2) {
-        motion = round(cartItems[i].qty / 3);
-        motion = motion * 9.97;
-      } else {
-        motion = null;
-      }
-    } else if (cartItems[i].name === "Smoke Sensor") {
-      if (cartItems[i].qty > 1) {
-        smoke = round(cartItems[i].qty / 2);
-        smoke = smoke * 4.98;
-      } else {
-        smoke = null;
+  // for (var i = 0; i < cartItems.length; i++) {
+  //   if (cartItems[i].name === "Motion Sensor") {
+  //     if (cartItems[i].qty > 2) {
+  //       motion = round(cartItems[i].qty / 3);
+  //       motion = motion * 9.97;
+  //     } else {
+  //       motion = null;
+  //     }
+  //   } else if (cartItems[i].name === "Smoke Sensor") {
+  //     if (cartItems[i].qty > 1) {
+  //       smoke = round(cartItems[i].qty / 2);
+  //       smoke = smoke * 4.98;
+  //     } else {
+  //       smoke = null;
+  //     }
+  //   }
+  // }
+  let discount2 = 0;
+  let num = 0;
+  if (product !== undefined) {
+    for (let k = 0; k < product.length; k++) {
+      for (let i = 0; i < cartItems.length; i++) {
+        if (
+          product[k].discount !== undefined &&
+          product[k].quantity !== undefined &&
+          product[k].name === cartItems[i].name &&
+          cartItems[i].qty > product[k].quantity - 1
+        ) {
+          num = round(cartItems[i].qty / product[k].quantity);
+
+          discount2 =
+            discount2 +
+            num *
+              (product[k].quantity * product[k].price - product[k].discount);
+        }
       }
     }
   }
@@ -66,9 +96,9 @@ const Basket = (props) => {
     totalPrice = eval(promoItems[j].formula);
   }
   let tp = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
-  var discount = motion + smoke + first;
-  totalPrice = totalPrice - discount;
-  let promoDiscount = tp - (totalPrice + discount);
+
+  totalPrice = totalPrice - discount2;
+  let promoDiscount = tp - (totalPrice + discount2);
   function clickHandler(name) {
     dispatch(promoRemove(name));
   }
@@ -134,7 +164,7 @@ const Basket = (props) => {
               <div className="row">
                 <div className="col-2">Quantity Discount</div>
 
-                <div className="col-1 text-right">{discount.toFixed(2)} €</div>
+                <div className="col-1 text-right">{discount2.toFixed(2)} €</div>
               </div>
               <div className="row">
                 <div className="col-2">Promo Discount</div>

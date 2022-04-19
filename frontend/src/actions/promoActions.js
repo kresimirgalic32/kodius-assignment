@@ -1,12 +1,23 @@
 import Axios from "axios";
 import { useState } from "react";
 import {
+  PRODUCT_LIST_FAIL,
+  PRODUCT_LIST_REQUEST,
+  PRODUCT_LIST_SUCCESS,
+} from "../constants/productConstants";
+import {
   PROMO_REQUEST,
   PROMO_SUCCESS,
   PROMO_FAIL,
   NEW_PROMO_REQUEST,
   NEW_PROMO_SUCCESS,
   NEW_PROMO_FAIL,
+  PROMO_LIST_SUCCESS,
+  PROMO_LIST_FAIL,
+  PROMO_LIST_REQUEST,
+  PROMO_DELETE_REQUEST,
+  PROMO_DELETE_SUCCESS,
+  PROMO_DELETE_FAIL,
 } from "../constants/promoConstants";
 
 export const promo = (name) => async (dispatch) => {
@@ -98,5 +109,35 @@ export const newPromo = (name, conjuction, formula) => async (dispatch) => {
           ? error.response.data.message
           : error.message,
     });
+  }
+};
+export const listPromo = () => async (dispatch) => {
+  dispatch({
+    type: PROMO_LIST_REQUEST,
+  });
+  try {
+    const { data } = await Axios.get("/api/promo/list");
+
+    dispatch({ type: PROMO_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: PROMO_LIST_FAIL, payload: message });
+  }
+};
+
+export const deletePromo = (promoId) => async (dispatch) => {
+  dispatch({ type: PROMO_DELETE_REQUEST, payload: promoId });
+  try {
+    const { data } = Axios.delete(`api/promo/${promoId}`);
+    dispatch({ type: PROMO_DELETE_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: PROMO_DELETE_FAIL, payload: message });
   }
 };

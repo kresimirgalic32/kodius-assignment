@@ -47,5 +47,24 @@ promoRouter.post(
     });
   })
 );
+promoRouter.get(
+  "/list",
+  expressAsyncHandler(async (req, res) => {
+    const promo = await Promo.find();
+    res.send(promo);
+  })
+);
+promoRouter.delete(
+  "/:id",
+  expressAsyncHandler(async (req, res) => {
+    const promo = await Promo.findById(req.params.id);
+    if (promo) {
+      const deletePromo = await promo.remove();
+      res.send({ message: "Order Deleted", order: deletePromo });
+    } else {
+      res.status(404).send({ message: "Order Not Found" });
+    }
+  })
+);
 
 export default promoRouter;

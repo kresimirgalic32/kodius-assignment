@@ -49,7 +49,6 @@ placeOrderRouter.post(
         req.body.totalPriceData +
         "€",
     };
-    console.log(req.body.discountData);
     mailTransporter.sendMail(mailDetails, function (err) {
       if (err) {
         console.log("Error Occurs");

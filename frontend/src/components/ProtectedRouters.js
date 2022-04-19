@@ -20,8 +20,6 @@ const useAuth = () => {
 
 const ProtectedRouters = () => {
   const isAuth = useAuth();
-  console.log("isAuth");
-  console.log(isAuth);
 
   return isAuth ? <Outlet /> : <Home />;
 };
