@@ -20,6 +20,7 @@ const NewProduct = () => {
     e.preventDefault();
 
     dispatch(newProduct(name, price, image, description, quantity, discount));
+    window.location.reload();
   };
   const clickHandler = (id) => {
     dispatch(deleteProduct(id));
