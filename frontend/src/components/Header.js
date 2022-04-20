@@ -20,7 +20,6 @@ const useAuth = () => {
 
 const Header = (props) => {
   const isAuth = useAuth();
-
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
