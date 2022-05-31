@@ -20,11 +20,16 @@ const NewProduct = () => {
     e.preventDefault();
 
     dispatch(newProduct(name, price, image, description, quantity, discount));
+    window.alert("You have added a new product called " + name);
     window.location.reload();
   };
-  const clickHandler = (id) => {
-    dispatch(deleteProduct(id));
-    window.location.reload();
+  const clickHandler = (id, name) => {
+    console.log(name);
+    if (window.confirm("Are you sure you want to remove " + name)) {
+      dispatch(deleteProduct(id));
+      window.alert("You have removed " + name);
+      window.location.reload();
+    }
   };
 
   return (
@@ -84,7 +89,7 @@ const NewProduct = () => {
         <div>
           <label htmlFor="name">Quantity</label>
           <input
-            type="text"
+            type="number"
             id="quantity"
             placeholder="Enter a quantity for discount"
             onChange={(e) => setQuantity(e.target.value)}
@@ -93,7 +98,7 @@ const NewProduct = () => {
         <div>
           <label htmlFor="name">Discount</label>
           <input
-            type="text"
+            type="number"
             id="discount"
             placeholder="Enter a discount"
             onChange={(e) => setDiscount(e.target.value)}
@@ -129,7 +134,7 @@ const NewProduct = () => {
                 <button
                   type="button"
                   className="promo"
-                  onClick={() => clickHandler(product._id)}
+                  onClick={() => clickHandler(product._id, product.name)}
                 >
                   {product.name}
                 </button>

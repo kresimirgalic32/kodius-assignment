@@ -96,7 +96,7 @@ button.small {
 }
 .form label {
   margin: 1rem 0;
-  /* display: block; */
+
 }
 input {
   height: 30px;
@@ -117,7 +117,7 @@ input {
   z-index: 1;
   background-color: #203040;
   margin: 0;
-  /* margin-top: 0.1rem; */
+
   border-radius: 0.5rem;
   color: white;
 }
@@ -154,14 +154,11 @@ input {
   margin-bottom: 5px;
 
   border-radius: 5px;
-  /* border: 5px; */
   border-width: thin;
-  /* border-style: none; */
 }
 .promo {
   background-color: white;
   padding-right: 3%;
-  /* padding-bottom: 25px; */
   margin: 3px;
   border-radius: 5px;
   font-size: 80%;
@@ -169,7 +166,6 @@ input {
 .flex {
   display: flex;
   justify-content: space-around;
-  /* align-items: flex-start; */
   float: left;
   text-align: center;
   padding-right: 50px;
@@ -180,7 +176,7 @@ input {
     flex-direction: column;
   }
   .row {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }
 
@@ -221,6 +217,7 @@ th{
   display: flex;
   justify-content: space-around;
 }
+
 .long{
   
   width: 25%;  
@@ -234,9 +231,17 @@ td{
 .none{
   display: none;
 }
+@media (max-width: 768px){
+  .order{
+  flex-direction: column;
+  }
+    td {
+      width: auto;
+    }
+}
 .float{
   float: right;
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 .left{
   float:left;
@@ -245,7 +250,6 @@ td{
 .search{
   display: block;
   margin: auto;
-  /* margin-left: 5px; */
   border-width: 2px;
   border-radius: 8px;
   border-color: red;
@@ -270,3 +274,4 @@ td{
   font-weight: 400;
   line-height: 37px;
 }
+

@@ -25,6 +25,7 @@ const index = (props) => {
         <Route path="/shipping" element={<ShippingAddress />} />
         <Route path="/payment" element={<PaymentMethod />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
+
         <Route path="/product/:id" element={<ProductScreen />} />
         <Route element={<ProtectedRouters />}>
           <Route path="/admin" element={<AdminPanel />} />

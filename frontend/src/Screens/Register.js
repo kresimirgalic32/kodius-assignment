@@ -56,6 +56,7 @@ const Register = (props) => {
             id="email"
             placeholder="Enter email"
             required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>

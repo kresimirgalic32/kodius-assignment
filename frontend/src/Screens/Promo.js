@@ -24,11 +24,17 @@ const Promo = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(newPromo(name, conjuction, formula));
+    window.alert("You have added a new promo code called " + name);
+
     window.location.reload();
   };
-  const clickHandler = (id) => {
-    dispatch(deletePromo(id));
-    window.location.reload();
+  const clickHandler = (id, name) => {
+    if (window.confirm("Are you sure you want to remove " + name)) {
+      dispatch(deletePromo(id));
+      window.alert("You have removed " + name);
+
+      window.location.reload();
+    }
   };
 
   return (
@@ -63,6 +69,7 @@ const Promo = (props) => {
               className="conjuction"
               name="conjuction"
               value="true"
+              required
               onChange={(e) => setConjuction(e.target.value)}
             />
             True
@@ -84,9 +91,12 @@ const Promo = (props) => {
           <input
             type="text"
             id="formula"
-            placeholder="Enter the formula"
+            placeholder="Enter the formula, 0-9, (), *, /, -, +, %, ^   allowed"
             required
-            onChange={(e) => setFormula("totalPrice-(" + e.target.value + ")")}
+            pattern="[-+%^*/\)\(\d]*"
+            onChange={(e) =>
+              setFormula("totalPrice-(totalPrice" + e.target.value + ")")
+            }
           />
         </div>
         <button className="primary" type="submit">
@@ -98,8 +108,8 @@ const Promo = (props) => {
           </label>
           <p>20%OFF</p>
 
-          <p>formula = totalPrice/5</p>
-          <p>totalPrice = totalPrice - (formula)</p>
+          <p>Formula = /5</p>
+          {/* <p>totalPrice = totalPrice - (totalPrice formula)</p> */}
         </div>
         <div>
           <h2>Remove Promo Codes</h2>
@@ -110,7 +120,7 @@ const Promo = (props) => {
                 <button
                   type="button"
                   className="promo"
-                  onClick={() => clickHandler(promo._id)}
+                  onClick={() => clickHandler(promo._id, promo.name)}
                 >
                   {promo.name}
                 </button>
