@@ -6,7 +6,7 @@ import Order from "../models/orderModel.js";
 
 const orderRouter = express.Router();
 orderRouter.get(
-  "/mine",
+  "/kodius-assignment/mine",
   // isAuth,
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find();
@@ -14,7 +14,7 @@ orderRouter.get(
   })
 );
 orderRouter.post(
-  "/",
+  "/kodius-assignment/",
   // isAuth,
   expressAsyncHandler(async (req, res) => {
     if (req.body.orderItems.length === 0) {
@@ -36,7 +36,7 @@ orderRouter.post(
   })
 );
 orderRouter.get(
-  "/:id",
+  "/kodius-assignment/:id",
   // isAuth,
   expressAsyncHandler(async (req, res) => {
     const order = await order.findById(req.params.id);

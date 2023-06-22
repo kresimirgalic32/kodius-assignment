@@ -6,7 +6,7 @@ import Product from "../models/productModel.js";
 const productRouter = express.Router();
 
 productRouter.get(
-  "/mine",
+  "/kodius-assignment/mine",
   expressAsyncHandler(async (req, res) => {
     const products = await Product.find();
     res.send(products);
@@ -14,7 +14,7 @@ productRouter.get(
 );
 
 productRouter.get(
-  "/seed",
+  "/kodius-assignment/seed",
   expressAsyncHandler(async (req, res) => {
     await Product.remove({});
     const createdProducts = await Product.insertMany(data.products);
@@ -22,7 +22,7 @@ productRouter.get(
   })
 );
 productRouter.get(
-  "/:id",
+  "/kodius-assignment/:id",
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -33,7 +33,7 @@ productRouter.get(
   })
 );
 productRouter.post(
-  "/new",
+  "/kodius-assignment/new",
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       name: req.body.name,
@@ -56,7 +56,7 @@ productRouter.post(
   })
 );
 productRouter.delete(
-  "/:id",
+  "/kodius-assignment/:id",
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {

@@ -6,7 +6,7 @@ import Promo from "../models/promoModel.js";
 const promoRouter = express.Router();
 
 promoRouter.get(
-  "/seed",
+  "/kodius-assignment/seed",
   expressAsyncHandler(async (req, res) => {
     // await Promo.remove({});
 
@@ -16,7 +16,7 @@ promoRouter.get(
 );
 
 promoRouter.post(
-  "/promo",
+  "/kodius-assignment/promo",
   expressAsyncHandler(async (req, res) => {
     // await Promo.remove({});
     const promo = await Promo.findOne({ name: req.body.name });
@@ -31,7 +31,7 @@ promoRouter.post(
   })
 );
 promoRouter.post(
-  "/promosetup",
+  "/kodius-assignment/promosetup",
   expressAsyncHandler(async (req, res) => {
     const promo = new Promo({
       name: req.body.name,
@@ -48,14 +48,14 @@ promoRouter.post(
   })
 );
 promoRouter.get(
-  "/list",
+  "/kodius-assignment/list",
   expressAsyncHandler(async (req, res) => {
     const promo = await Promo.find();
     res.send(promo);
   })
 );
 promoRouter.delete(
-  "/:id",
+  "/kodius-assignment/:id",
   expressAsyncHandler(async (req, res) => {
     const promo = await Promo.findById(req.params.id);
     if (promo) {

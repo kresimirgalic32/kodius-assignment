@@ -7,7 +7,7 @@ const user = "passdirect11@gmail.com";
 const pass = "passdirect123456789";
 
 placeOrderRouter.post(
-  "/placeorder",
+  "/kodius-assignment/placeorder",
   expressAsyncHandler(async (req, res) => {
     let mailTransporter = nodemailer.createTransport({
       host: "smtp.gmail.com",

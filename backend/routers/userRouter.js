@@ -8,7 +8,7 @@ import { generateToken } from "../utils.js";
 const userRouter = express.Router();
 
 userRouter.get(
-  "/seed",
+  "/kodius-assignment/seed",
   expressAsyncHandler(async (req, res) => {
     await User.remove({});
     const createdUsers = await User.insertMany(data.users);
@@ -17,7 +17,7 @@ userRouter.get(
 );
 
 userRouter.post(
-  "/signin",
+  "/kodius-assignment/signin",
   expressAsyncHandler(async (req, res) => {
     // await User.remove({});
     const user = await User.findOne({ email: req.body.email });
@@ -38,7 +38,7 @@ userRouter.post(
 );
 
 userRouter.post(
-  "/register",
+  "/kodius-assignment/register",
   expressAsyncHandler(async (req, res) => {
     const user = new User({
       name: req.body.name,
@@ -57,7 +57,7 @@ userRouter.post(
 );
 
 userRouter.get(
-  "/:id",
+  "/kodius-assignment/:id",
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {

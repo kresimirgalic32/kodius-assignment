@@ -16,12 +16,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // eslint-disable-next-line no-undef
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/kodius");
-app.use("/api/users", userRouter);
-app.use("/api/promo", promoRouter);
+app.use("/kodius-assignment/api/users", userRouter);
+app.use("/kodius-assignment/api/promo", promoRouter);
 
-app.use("/api/products", productRouter);
-app.use("/api/orders", orderRouter);
-app.use("/api/pom", placeOrderRouter);
+app.use("/kodius-assignment/api/products", productRouter);
+app.use("/kodius-assignment/api/orders", orderRouter);
+app.use("/kodius-assignment/api/pom", placeOrderRouter);
 
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/frontend/build")));
@@ -29,7 +29,7 @@ app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "frontend/build/index.html"))
 );
 
-app.get("/", (req, res) => {
+app.get("/kodius-assignment/", (req, res) => {
   res.send("Server is ready");
 });
 
