@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/kodius-assignment/static/css/main.6e995ee5.css",
-    "main.js": "/kodius-assignment/static/js/main.79cc50ea.js",
+    "main.js": "/kodius-assignment/static/js/main.6ce66745.js",
     "static/js/787.cda612ba.chunk.js": "/kodius-assignment/static/js/787.cda612ba.chunk.js",
     "index.html": "/kodius-assignment/index.html",
     "main.6e995ee5.css.map": "/kodius-assignment/static/css/main.6e995ee5.css.map",
-    "main.79cc50ea.js.map": "/kodius-assignment/static/js/main.79cc50ea.js.map",
+    "main.6ce66745.js.map": "/kodius-assignment/static/js/main.6ce66745.js.map",
     "787.cda612ba.chunk.js.map": "/kodius-assignment/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6e995ee5.css",
-    "static/js/main.79cc50ea.js"
+    "static/js/main.6ce66745.js"
   ]
 }
