@@ -19,7 +19,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
 
-    const { data } = await Axios.post("/api/orders", order, {
+    const { data } = await Axios.post("/kodius-assignment/api/orders", order, {
       // headers: {
       //   Authorization: `Bearer ${userInfo.token}`,
       // },
@@ -45,7 +45,7 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.get(
-      `/api/orders/${orderId}`
+      `/kodius-assignment/api/orders/${orderId}`
       // {
       // headers: { Authorization: `Bearer ${userInfo.token}` },
       // }
@@ -66,7 +66,7 @@ export const listOrderMine = (order) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get("/api/orders/mine", {
+    const { data } = await Axios.get("/kodius-assignment/api/orders/mine", {
       // headers: {
       //   Authorization: `Bearer ${userInfo.token}`,
       // },

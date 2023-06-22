@@ -19,7 +19,7 @@ export const listProducts = () => async (dispatch) => {
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get("/api/products/mine");
+    const { data } = await Axios.get("/kodius-assignment/api/products/mine");
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -35,7 +35,7 @@ export const newProduct =
     dispatch({ type: NEW_PRODUCT_REQUEST, payload: { name, price, image } });
 
     try {
-      const data = await Axios.post("api/products/new", {
+      const data = await Axios.post("/kodius-assignment/api/products/new", {
         name,
         price,
         image,
@@ -57,7 +57,7 @@ export const newProduct =
 export const detailsProduct = (productId) => async (dispatch) => {
   dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
   try {
-    const { data } = await Axios.get(`/api/products/${productId}`);
+    const { data } = await Axios.get(`/kodius-assignment/api/products/${productId}`);
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -72,7 +72,7 @@ export const detailsProduct = (productId) => async (dispatch) => {
 export const deleteProduct = (productId) => async (dispatch) => {
   dispatch({ type: PRODUCT_DELETE_REQUEST, payload: productId });
   try {
-    const { data } = Axios.delete(`api/products/${productId}`);
+    const { data } = Axios.delete(`/kodius-assignment/api/products/${productId}`);
     dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =

@@ -23,7 +23,7 @@ import {
 export const promo = (name) => async (dispatch) => {
   dispatch({ type: PROMO_REQUEST, payload: { name } });
   try {
-    const { data } = await Axios.post("api/promo/promo", { name });
+    const { data } = await Axios.post("/kodius-assignment/api/promo/promo", { name });
     dispatch({ type: PROMO_SUCCESS, payload: data });
     let test = localStorage.getItem("promo");
 
@@ -68,7 +68,7 @@ export const promo = (name) => async (dispatch) => {
 export const promoRemove = (name) => async (dispatch) => {
   dispatch({ type: PROMO_REQUEST, payload: { name } });
   try {
-    const { data } = await Axios.post("api/promo/promo", { name });
+    const { data } = await Axios.post("/kodius-assignment/api/promo/promo", { name });
     dispatch({ type: PROMO_SUCCESS, payload: data });
     var remove = JSON.parse(localStorage.getItem("promo"));
     for (var i = 0; i < remove.length; ) {
@@ -95,7 +95,7 @@ export const promoRemove = (name) => async (dispatch) => {
 export const newPromo = (name, conjuction, formula) => async (dispatch) => {
   dispatch({ type: NEW_PROMO_REQUEST, payload: { name, conjuction, formula } });
   try {
-    const { data } = await Axios.post("/api/promo/promosetup", {
+    const { data } = await Axios.post("/kodius-assignment/api/promo/promosetup", {
       name,
       conjuction,
       formula,
@@ -116,7 +116,7 @@ export const listPromo = () => async (dispatch) => {
     type: PROMO_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get("/api/promo/list");
+    const { data } = await Axios.get("/kodius-assignment/api/promo/list");
 
     dispatch({ type: PROMO_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -131,7 +131,7 @@ export const listPromo = () => async (dispatch) => {
 export const deletePromo = (promoId) => async (dispatch) => {
   dispatch({ type: PROMO_DELETE_REQUEST, payload: promoId });
   try {
-    const { data } = Axios.delete(`api/promo/${promoId}`);
+    const { data } = Axios.delete(`/kodius-assignment/api/promo/${promoId}`);
     dispatch({ type: PROMO_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =

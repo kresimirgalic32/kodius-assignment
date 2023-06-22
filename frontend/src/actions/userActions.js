@@ -15,7 +15,7 @@ import {
 export const signin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
-    const { data } = await Axios.post("/api/users/signin", { email, password });
+    const { data } = await Axios.post("/kodius-assignment/api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
@@ -32,7 +32,7 @@ export const signin = (email, password) => async (dispatch) => {
 export const register = (name, email, password) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
   try {
-    const { data } = await Axios.post("/api/users/register", {
+    const { data } = await Axios.post("/kodius-assignment/api/users/register", {
       name,
       email,
       password,
@@ -66,7 +66,7 @@ export const userGet = (userId) => async (dispatch) => {
   try {
     userId = JSON.stringify(userId.userId);
     userId = userId.slice(1, -1);
-    const { data } = await Axios.get(`/api/users/${userId}`);
+    const { data } = await Axios.get(`/kodius-assignment/api/users/${userId}`);
     dispatch({ type: USER_GET_SUCCESS, payload: data });
   } catch (error) {
     const message =
