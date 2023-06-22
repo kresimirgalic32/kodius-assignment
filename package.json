@@ -23,7 +23,6 @@
   "bugs": {
     "url": "https://github.com/kresimirgalic32/kodius-assignment/issues"
   },
-  "homepage": "https://github.com/kresimirgalic32/kodius-assignment#readme",
   "dependencies": {
     "@types/express": "^4.17.13",
     "bcryptjs": "^2.4.3",
