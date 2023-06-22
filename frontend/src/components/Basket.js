@@ -43,7 +43,7 @@ const Basket = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    navigate("/shipping");
+    navigate("/kodius-assignment/shipping");
   };
 
   function round(num) {

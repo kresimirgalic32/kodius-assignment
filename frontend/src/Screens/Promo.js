@@ -41,7 +41,7 @@ const Promo = (props) => {
     <div>
       <header className="block row center color">
         <div>
-          <a href="/">
+          <a href="/kodius-assignment/">
             <h1>Kodius</h1>
           </a>
         </div>

@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "cd frontend && gh-pages -d build && cd ../",
     "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
     "start": "node backend/server.js",
     "preinstall": "npx npm-force-resolutions"

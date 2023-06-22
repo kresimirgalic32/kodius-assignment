@@ -62,7 +62,7 @@ const Order = (props) => {
                           ></img>
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
+                          <Link to={`/kodius-assignment/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </div>

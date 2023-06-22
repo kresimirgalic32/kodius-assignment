@@ -90,7 +90,7 @@ const BasketOrder = (props) => {
     localStorage.removeItem("cartItems");
     localStorage.removeItem("promo");
 
-    navigate("/signin?redirect=/");
+    navigate("/kodius-assignment/signin?redirect=/");
   };
 
   useEffect(() => {

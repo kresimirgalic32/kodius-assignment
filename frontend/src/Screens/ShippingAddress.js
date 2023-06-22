@@ -12,7 +12,7 @@ const ShippingAddress = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   if (!userInfo) {
-    navigate("/signin");
+    navigate("/kodius-assignment/signin");
   }
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [address, setAddress] = useState(shippingAddress.address || "");
@@ -27,7 +27,7 @@ const ShippingAddress = () => {
     dispatch(
       saveShippingAddress({ fullName, address, city, postalCode, country })
     );
-    navigate("/payment");
+    navigate("/kodius-assignment/payment");
   };
 
   return (

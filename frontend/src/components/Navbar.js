@@ -7,7 +7,7 @@ const Navbar = () => {
       <div>
         <ul>
           <li>
-            <Link to="/" className="text">
+            <Link to="/kodius-assignment/" className="text">
               home
             </Link>
           </li>
@@ -16,12 +16,12 @@ const Navbar = () => {
       <div>
         <ul>
           <li>
-            <Link to="/cart" className="text">
+            <Link to="/kodius-assignment/cart" className="text">
               cart
             </Link>
           </li>
           <li>
-            <Link to="/signin" className="text">
+            <Link to="/kodius-assignment/signin" className="text">
               Sign In
             </Link>
           </li>

@@ -20,7 +20,7 @@ const ProductScreen = (props) => {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
   const back = () => {
-    navigate("/");
+    navigate("/kodius-assignment/");
   };
   return (
     <div>

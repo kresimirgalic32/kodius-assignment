@@ -18,22 +18,22 @@ const index = (props) => {
   return (
     <Router>
       <Routes>
-        <Route exacth path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/shipping" element={<ShippingAddress />} />
-        <Route path="/payment" element={<PaymentMethod />} />
-        <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route exacth path="/kodius-assignment/" element={<Home />} />
+        <Route path="/kodius-assignment/cart" element={<Cart />} />
+        <Route path="/kodius-assignment/signin" element={<Signin />} />
+        <Route path="/kodius-assignment/register" element={<Register />} />
+        <Route path="/kodius-assignment/shipping" element={<ShippingAddress />} />
+        <Route path="/kodius-assignment/payment" element={<PaymentMethod />} />
+        <Route path="/kodius-assignment/placeorder" element={<PlaceOrder />} />
 
-        <Route path="/product/:id" element={<ProductScreen />} />
+        <Route path="/kodius-assignment/product/:id" element={<ProductScreen />} />
         <Route element={<ProtectedRouters />}>
-          <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/promo" element={<Promo />} />
-          <Route path="/newproduct" element={<NewProduct />} />
+          <Route path="/kodius-assignment/admin" element={<AdminPanel />} />
+          <Route path="/kodius-assignment/promo" element={<Promo />} />
+          <Route path="/kodius-assignment/newproduct" element={<NewProduct />} />
         </Route>
 
-        <Route path="/orderhistory" element={<OrderHistory />} />
+        <Route path="/kodius-assignment/orderhistory" element={<OrderHistory />} />
       </Routes>
     </Router>
   );

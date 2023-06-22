@@ -15,7 +15,7 @@ const Product = (props) => {
             <div key={product._id} className="flex">
               {product.name.toLowerCase().includes(searchName.toLowerCase()) ? (
                 <div className="product">
-                  <Link to={`/product/${product._id}`}>
+                  <Link to={`/kodius-assignment/product/${product._id}`}>
                     <img
                       className="small"
                       src={product.image}
@@ -23,7 +23,7 @@ const Product = (props) => {
                     />
                   </Link>
 
-                  <Link to={`/product/${product._id}`}>
+                  <Link to={`/kodius-assignment/product/${product._id}`}>
                     <h3>{product.name}</h3>
                   </Link>
                   <div>{product.price} €</div>

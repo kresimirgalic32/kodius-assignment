@@ -34,7 +34,7 @@ const Header = (props) => {
         </a>
       </div>
       <div>
-        <Link to="/cart">
+        <Link to="/kodius-assignment/cart">
           Cart{" "}
           {props.countCartItems ? (
             <button className="badge">{props.countCartItems}</button>
@@ -49,19 +49,19 @@ const Header = (props) => {
             </Link>
             <ul className="dropdown-content">
               <li>
-                <Link to="/orderhistory" className="test">
+                <Link to="/kodius-assignment/orderhistory" className="test">
                   Order History
                 </Link>
               </li>
               {isAuth ? (
                 <div>
                   <li>
-                    <Link to="/newproduct" className="test">
+                    <Link to="/kodius-assignment/newproduct" className="test">
                       New Product
                     </Link>
                   </li>
                   <li>
-                    <Link to="/promo" className="test">
+                    <Link to="/kodius-assignment/promo" className="test">
                       New Promo
                     </Link>
                   </li>
@@ -75,7 +75,7 @@ const Header = (props) => {
             </ul>
           </div>
         ) : (
-          <Link to="/signin" className="space">
+          <Link to="/kodius-assignment/signin" className="space">
             Sign In
           </Link>
         )}

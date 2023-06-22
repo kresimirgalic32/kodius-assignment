@@ -9,7 +9,7 @@ const PaymentMethod = (props) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   if (!shippingAddress.address) {
-    navigate("/shipping");
+    navigate("/kodius-assignment/shipping");
   }
 
   const [paymentMethod, setPaymentMethod] = useState("Credit Card");
@@ -17,7 +17,7 @@ const PaymentMethod = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch(savePaymentMethod(paymentMethod));
-    navigate("/placeorder");
+    navigate("/kodius-assignment/placeorder");
     window.location.reload()
   };
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");

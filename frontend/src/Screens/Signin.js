@@ -11,7 +11,7 @@ const Signin = (props) => {
 
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
-  const redirect = redirectInUrl ? redirectInUrl : "/";
+  const redirect = redirectInUrl ? redirectInUrl : "/kodius-assignment/";
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
@@ -64,7 +64,7 @@ const Signin = (props) => {
           <label />
           <div>
             New customer?{" "}
-            <Link to={`/register?redirect=${redirect}`}>
+            <Link to={`/kodius-assignment/register?redirect=${redirect}`}>
               Create you account
             </Link>
           </div>

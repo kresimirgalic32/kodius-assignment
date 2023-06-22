@@ -14,7 +14,7 @@ const Register = (props) => {
   const [cartItems, setCartItems] = useState([]);
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
-  const redirect = redirectInUrl ? redirectInUrl : "/";
+  const redirect = redirectInUrl ? redirectInUrl : "/kodius-assignment/";
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo } = userRegister;
 
@@ -90,7 +90,7 @@ const Register = (props) => {
           <label />
           <div>
             Already have an account{" "}
-            <Link to={`/signin?redirect=${redirect}`}>Sign In</Link>
+            <Link to={`/kodius-assignment/signin?redirect=${redirect}`}>Sign In</Link>
           </div>
         </div>
       </form>
